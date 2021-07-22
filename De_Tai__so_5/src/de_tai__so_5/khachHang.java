@@ -12,12 +12,12 @@ package de_tai__so_5;
 public class khachHang {
     private int maKhachHang;
     private String hoTen;
-    private String Tuoi;
+    private int Tuoi;
     private int CMND;
     private int SDT;
     private String phuongThucThanhToan;
 
-    public khachHang(int maKhachHang, String hoTen, String Tuoi, int CMND, int SDT, String phuongThucThanhToan) {
+    public khachHang(int maKhachHang, String hoTen, int Tuoi, int CMND, int SDT, String phuongThucThanhToan) {
         this.maKhachHang = maKhachHang;
         this.hoTen = hoTen;
         this.Tuoi = Tuoi;
@@ -48,11 +48,11 @@ public class khachHang {
         this.hoTen = hoTen;
     }
 
-    public String getTuoi() {
+    public int getTuoi() {
         return Tuoi;
     }
 
-    public void setTuoi(String Tuoi) {
+    public void setTuoi(int Tuoi) {
         this.Tuoi = Tuoi;
     }
 

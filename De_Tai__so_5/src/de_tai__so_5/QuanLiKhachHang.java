@@ -60,9 +60,9 @@ public class QuanLiKhachHang {
     }
 
     // nhập tuổi
-    public String nhapTuoi() {
+    public int nhapTuoi() {
         System.out.println("Nhap Tuoi: ");
-        return sc.nextLine();
+        return sc.nextInt();
     }
 
     // nhập số CMND/TCC
@@ -87,7 +87,7 @@ public class QuanLiKhachHang {
     public void add() {
         int maKhachHang = nhapMaKhachHang();
         String hoTenKhachHang = nhapHoTenKhachHang();
-        String tuoi = nhapTuoi();
+        int tuoi = nhapTuoi();
         int soCMND = nhapSoCMND();
         int soDT = nhapSDT();
         sc.nextLine();
@@ -119,7 +119,7 @@ public class QuanLiKhachHang {
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
             if (danhSachKhachHang.get(i).getMaKhachHang() == (makhachHang)) {
                 flag = true;
-                danhSachKhachHang.get(i).setTuoi(new Scanner(System.in).nextLine());
+                danhSachKhachHang.get(i).setTuoi(new Scanner(System.in).nextInt());
             }
         }
         if (flag == false) {
@@ -204,14 +204,14 @@ public class QuanLiKhachHang {
     }
 
     // Sắp xếp theo tuổi khách hàng
-    public void sapXepTheoTuoi() {
-        Collections.sort(danhSachKhachHang, new Comparator<khachHang>() {
-            @Override
-            public int compare(khachHang o1, khachHang o2) {
-                return o1.getTuoi().compareTo(o2.getTuoi());
-            }
-        });
-    }
+//    public void sapXepTheoTuoi() {
+//        Collections.sort(danhSachKhachHang, new Comparator<khachHang>() {
+//            @Override
+//            public int compare(khachHang o1, khachHang o2) {
+//                return o1.getTuoi().compareTo(o2.getTuoi());
+//            }
+//        });
+//    }
 
     // hiển thị danh sách khách hàng
     public void show() {
