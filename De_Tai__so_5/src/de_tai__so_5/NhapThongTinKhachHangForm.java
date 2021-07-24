@@ -1,7 +1,15 @@
 package de_tai__so_5;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,6 +19,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 //    khai bao list khach hang
     int id = 0;
     List<khachHang> danhSachKhachHang = new ArrayList<>();
+    DocGhiFile dc = new DocGhiFile();
+
+    private static final String curentDir = System.getProperty("user.dir");
+    private static final String separator = File.separator;
+    private static final String PATH_FILE_CSV = curentDir + separator + "data" + separator + "KhachHang.csv";
 
     public NhapThongTinKhachHangForm() {
         initComponents();
@@ -54,7 +67,15 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(48, 62, 80));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -63,6 +84,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Họ và tên:");
 
+        txtHoTen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtHoTenFocusLost(evt);
+            }
+        });
         txtHoTen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtHoTenMouseClicked(evt);
@@ -129,7 +155,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         });
 
         boxPhuongThuThanhToan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        boxPhuongThuThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thanh toán bàng tiền mặt ", "Thanh toán bằng thẻ", " " }));
+        boxPhuongThuThanhToan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thanh toan bang tien mat", "Thanh toan thanh the", "" }));
         boxPhuongThuThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxPhuongThuThanhToanActionPerformed(evt);
@@ -173,6 +199,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         ButunReset1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButunReset1.setIcon(new javax.swing.ImageIcon("D:\\img\\timkiem1.png")); // NOI18N
         ButunReset1.setText("Tìm kiếm");
+        ButunReset1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButunReset1MouseClicked(evt);
+            }
+        });
         ButunReset1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButunReset1ActionPerformed(evt);
@@ -193,6 +224,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         ButunReset4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButunReset4.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
         ButunReset4.setText("Hiển thị");
+        ButunReset4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButunReset4MouseClicked(evt);
+            }
+        });
         ButunReset4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButunReset4ActionPerformed(evt);
@@ -366,13 +402,24 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     private void buttunLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuuActionPerformed
         int maKhachHang = id++;
         String HotenKhachHang = txtHoTen.getText();
+//        if (extractNumber(HotenKhachHang) == 0) {
+//            JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
+
+//        }
+        if (extractNumber(HotenKhachHang) == 0) {
+
+        }
         int tuoi = Integer.parseInt(txtTuoi.getText());
         int scmnd = Integer.parseInt(txtCMND.getText());
         int sdt = Integer.parseInt(txtSDT.getText());
         String phuongTTT = boxPhuongThuThanhToan.getSelectedItem().toString();
         khachHang kh = new khachHang(maKhachHang, HotenKhachHang, tuoi, scmnd, sdt, phuongTTT);
+
+//      
         danhSachKhachHang.add(kh);
+//        dc.ghiFile(danhSachKhachHang);
         tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, tuoi, scmnd, sdt, phuongTTT});
+
     }//GEN-LAST:event_buttunLuuActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -397,19 +444,19 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     private void txtHoTenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHoTenMouseClicked
 //       xử lý ngoại lệ tên
-        if (this.isVisible()) {
-            String hoten = txtHoTen.getText();
-            int d = extractNumber(hoten);
-            if (hoten.length() > 0) {
-                if (d == 0) {
-                    JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
-                    txtHoTen.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Họ tên không được để trống");
-                txtHoTen.requestFocus();
-            }
-        }
+//        if (this.isVisible()) {
+//            String hoten = txtHoTen.getText();
+//            int d = extractNumber(hoten);
+//            if (hoten.length() > 0) {
+//                if (d == 0) {
+//                    JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
+//                    txtHoTen.requestFocus();
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(rootPane, "Họ tên không được để trống");
+//                txtHoTen.requestFocus();
+//            }
+//        }
 
     }//GEN-LAST:event_txtHoTenMouseClicked
 
@@ -457,7 +504,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         if (this.isVisible()) {
             String soDT = txtSDT.getText();
             int d = extractNumber(soDT);
-            if (soDT.length() > 0 ) {
+            if (soDT.length() > 0) {
                 if (d == 1) {
                     JOptionPane.showMessageDialog(rootPane, "Nhập đúng định dạng nhập số  ví dụ: 0865700447");
                     txtSDT.requestFocus(); //nhập lại đúng chỗ yêu cầu nhập lần lượt
@@ -486,10 +533,47 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ButunReset4ActionPerformed
 
+    private void ButunReset1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset1MouseClicked
+//        Phương thức tìm kiếm 
+
+    }//GEN-LAST:event_ButunReset1MouseClicked
+
+    private void ButunReset4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset4MouseClicked
+//hiển thị thông tin 
+
+
+    }//GEN-LAST:event_ButunReset4MouseClicked
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+//        danhSachKhachHang = nhapThongTin();
+//        dc.ghiFile(danhSachKhachHang);
+//        for (khachHang item : danhSachKhachHang) {
+//            System.out.println(item.toString());
+//        }
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+//        danhSachKhachHang = nhapThongTin();
+        dc.ghiFile(danhSachKhachHang);
+        for (khachHang item : danhSachKhachHang) {
+            System.out.println(item.toString());
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void txtHoTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHoTenFocusLost
+        // TODO add your handling code here:
+        if (extractNumber(txtHoTen.getText()) == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
+
+        }
+    }//GEN-LAST:event_txtHoTenFocusLost
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

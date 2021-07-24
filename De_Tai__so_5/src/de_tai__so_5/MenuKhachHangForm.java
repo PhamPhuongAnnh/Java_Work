@@ -432,8 +432,8 @@ public class MenuKhachHangForm extends javax.swing.JFrame {
         phong.setVisible(true);
         phong.pack();
         phong.setLocationRelativeTo(null);
-        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+//        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_txtKhachHang1MouseClicked
 
     private void txtDatPhong1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDatPhong1MouseClicked
@@ -442,21 +442,21 @@ public class MenuKhachHangForm extends javax.swing.JFrame {
         phong.setVisible(true);
         phong.pack();
         phong.setLocationRelativeTo(null);
-        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+//        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_txtDatPhong1MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
-        MenuForm  menu = new MenuForm();
-        menu.setVisible(true);
+//        MenuForm  menu = new MenuForm();
+//        menu.setVisible(true);
         
         NhapThongTinKhachHangForm phong = new NhapThongTinKhachHangForm();
         phong.setVisible(true);
         phong.pack();
         phong.setLocationRelativeTo(null);
-        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+//        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void txtHome2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHome2MouseClicked
@@ -465,8 +465,8 @@ public class MenuKhachHangForm extends javax.swing.JFrame {
         phong.setVisible(true);
         phong.pack();
         phong.setLocationRelativeTo(null);
-        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+//        phong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_txtHome2MouseClicked
 
     /**

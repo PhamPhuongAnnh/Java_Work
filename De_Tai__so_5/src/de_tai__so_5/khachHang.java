@@ -79,4 +79,5 @@ public class khachHang {
     public void setPhuongThucThanhToan(String phuongThucThanhToan) {
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
+    
 }
