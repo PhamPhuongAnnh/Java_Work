@@ -31,14 +31,25 @@ public class DocGhiFile {
     public void ghiFile(List<khachHang> list) {
         FileWriter fw = null;
         try {
-            fw = new FileWriter(PATH_FILE_CSV, true);
-            CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-//            String[] header = {"Ma KH", "Ho Ten", "So CMND", "SĐT", "Tuoi", "PTTT"};
-//            csvWrite.writeNext(header);
-            for (khachHang item : list) {
-                csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), String.valueOf(item.getCMND()), String.valueOf(item.getSDT()), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
+            File f = new File(PATH_FILE_CSV);
+            if (!f.exists()) {
+                fw = new FileWriter(PATH_FILE_CSV, true);
+                CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                String[] header = {"Ma KH", "Ho Ten", "So CMND", "SĐT", "Tuoi", "PTTT"};
+                csvWrite.writeNext(header);
+                for (khachHang item : list) {
+                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), String.valueOf(item.getCMND()), String.valueOf(item.getSDT()), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
 
+                }
+            } else {
+                fw = new FileWriter(PATH_FILE_CSV, true);
+                CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                for (khachHang item : list) {
+                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), String.valueOf(item.getCMND()), String.valueOf(item.getSDT()), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
+
+                }
             }
+
         } catch (IOException ex) {
             Logger.getLogger(DocGhiFile.class
                     .getName()).log(Level.SEVERE, null, ex);

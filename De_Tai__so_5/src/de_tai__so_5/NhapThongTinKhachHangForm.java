@@ -17,7 +17,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     DefaultTableModel tableModel;
 //    khai bao list khach hang
-    int id = 0;
+    int id =0 ;
     List<khachHang> danhSachKhachHang = new ArrayList<>();
     DocGhiFile dc = new DocGhiFile();
 
@@ -54,6 +54,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         ButunReset2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         ButunReset4 = new javax.swing.JButton();
+        ButunReset5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -116,6 +117,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Phương thức thanh toán:");
 
+        txtCMND.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCMNDFocusLost(evt);
+            }
+        });
         txtCMND.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtCMNDMouseClicked(evt);
@@ -127,6 +133,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             }
         });
 
+        txtTuoi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTuoiFocusLost(evt);
+            }
+        });
         txtTuoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtTuoiMouseClicked(evt);
@@ -141,6 +152,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         txtSDT.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 txtSDTMouseDragged(evt);
+            }
+        });
+        txtSDT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSDTFocusLost(evt);
             }
         });
         txtSDT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -235,6 +251,21 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             }
         });
 
+        ButunReset5.setBackground(new java.awt.Color(204, 204, 204));
+        ButunReset5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButunReset5.setIcon(new javax.swing.ImageIcon("D:\\img\\chinhSua.png")); // NOI18N
+        ButunReset5.setText("Xóa");
+        ButunReset5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButunReset5MouseClicked(evt);
+            }
+        });
+        ButunReset5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButunReset5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -273,6 +304,8 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                         .addComponent(ButunReset2)
                         .addGap(120, 120, 120)
                         .addComponent(ButunReset4)
+                        .addGap(93, 93, 93)
+                        .addComponent(ButunReset5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jSeparator1)
         );
@@ -313,7 +346,8 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                     .addComponent(ButunReset)
                     .addComponent(buttunLuu)
                     .addComponent(ButunReset2)
-                    .addComponent(ButunReset4))
+                    .addComponent(ButunReset4)
+                    .addComponent(ButunReset5))
                 .addGap(189, 189, 189))
         );
 
@@ -400,25 +434,25 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunResetActionPerformed
 
     private void buttunLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuuActionPerformed
+        try {
+            File f = new File(PATH_FILE_CSV);
+            if (!f.exists()) {
+                id = id ++;
+            } else {
+                List list = dc.docFile();
+                id = list.size();
+            }
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         int maKhachHang = id++;
         String HotenKhachHang = txtHoTen.getText();
-//        if (extractNumber(HotenKhachHang) == 0) {
-//            JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
-
-//        }
-        if (extractNumber(HotenKhachHang) == 0) {
-
-        }
         int tuoi = Integer.parseInt(txtTuoi.getText());
         int scmnd = Integer.parseInt(txtCMND.getText());
         int sdt = Integer.parseInt(txtSDT.getText());
         String phuongTTT = boxPhuongThuThanhToan.getSelectedItem().toString();
         khachHang kh = new khachHang(maKhachHang, HotenKhachHang, tuoi, scmnd, sdt, phuongTTT);
-
-//      
         danhSachKhachHang.add(kh);
-//        dc.ghiFile(danhSachKhachHang);
-        tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, tuoi, scmnd, sdt, phuongTTT});
 
     }//GEN-LAST:event_buttunLuuActionPerformed
 
@@ -427,6 +461,9 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jLabel10MouseClicked
     public int extractNumber(String str) {
+        if (str == null) {
+            return -1;
+        }
         boolean found = false;
         for (int i = 0; i < str.length(); i++) {
             char dt = str.charAt(i);
@@ -443,78 +480,23 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }
 
     private void txtHoTenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHoTenMouseClicked
-//       xử lý ngoại lệ tên
-//        if (this.isVisible()) {
-//            String hoten = txtHoTen.getText();
-//            int d = extractNumber(hoten);
-//            if (hoten.length() > 0) {
-//                if (d == 0) {
-//                    JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
-//                    txtHoTen.requestFocus();
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "Họ tên không được để trống");
-//                txtHoTen.requestFocus();
-//            }
-//        }
 
     }//GEN-LAST:event_txtHoTenMouseClicked
 
     private void txtCMNDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCMNDMouseClicked
-        //Xử lý số chướng minh nhân dân 
-        if (this.isVisible()) {
-            String soCMND = txtCMND.getText();
-            int d = extractNumber(soCMND);
-            if (soCMND.length() > 0) {
-                if (d == 1) {
-                    JOptionPane.showMessageDialog(rootPane, "Nhập đúng định dạng nhập số từ 0 đến 9");
-                    txtCMND.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Số chứng minh nhân dân không được để trống");
-                txtCMND.requestFocus();
 
-            }
-        }
     }//GEN-LAST:event_txtCMNDMouseClicked
 
     private void txtSDTMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSDTMouseDragged
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txtSDTMouseDragged
 
     private void txtSDTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSDTMouseClicked
-//        Xử lý số điện thoại
-        if (this.isVisible()) {
-            String soDT = txtSDT.getText();
-            int d = extractNumber(soDT);
-            if (soDT.length() > 0) {
-                if (d == 1) {
-                    JOptionPane.showMessageDialog(rootPane, "Nhập đúng định dạng nhập số từ 0 đến 9");
-                    txtSDT.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Số điện thoại không được để trống");
-                txtSDT.requestFocus();
-            }
-        }
+
     }//GEN-LAST:event_txtSDTMouseClicked
 
     private void txtTuoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuoiMouseClicked
-        // Xử lý tuổi
-        if (this.isVisible()) {
-            String soDT = txtSDT.getText();
-            int d = extractNumber(soDT);
-            if (soDT.length() > 0) {
-                if (d == 1) {
-                    JOptionPane.showMessageDialog(rootPane, "Nhập đúng định dạng nhập số  ví dụ: 0865700447");
-                    txtSDT.requestFocus(); //nhập lại đúng chỗ yêu cầu nhập lần lượt
-                }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Tuổi  không được để trống");
-                txtSDT.requestFocus();
 
-            }
-        }
     }//GEN-LAST:event_txtTuoiMouseClicked
 
     private void ButunReset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset1ActionPerformed
@@ -535,50 +517,82 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     private void ButunReset1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset1MouseClicked
 //        Phương thức tìm kiếm 
-
+TimKiemForm.main();
     }//GEN-LAST:event_ButunReset1MouseClicked
 
     private void ButunReset4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset4MouseClicked
-//hiển thị thông tin 
+        try {
+            //hiển thị thông tin
+            List<khachHang> list = dc.docFile();
+            for (khachHang item : list) {
+                int maKH = item.getMaKhachHang();
+                String hoTen = item.getHoTen();
+                int SoCMND = item.getCMND();
+                int soDT = item.getSDT();
+                int tuoi = item.getTuoi();
+                String pttt = item.getPhuongThucThanhToan();
+                tableModel.addRow(new Object[]{maKH, hoTen,SoCMND, soDT,tuoi, pttt});
+
+            }
+
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_ButunReset4MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-//        danhSachKhachHang = nhapThongTin();
-//        dc.ghiFile(danhSachKhachHang);
-//        for (khachHang item : danhSachKhachHang) {
-//            System.out.println(item.toString());
-//        }
+
     }//GEN-LAST:event_formWindowClosed
-
+//ghi file
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-//        danhSachKhachHang = nhapThongTin();
         dc.ghiFile(danhSachKhachHang);
-        for (khachHang item : danhSachKhachHang) {
-            System.out.println(item.toString());
-        }
     }//GEN-LAST:event_formWindowClosing
-
+//xử lý ngoại lệ
     private void txtHoTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHoTenFocusLost
-        // TODO add your handling code here:
-        if (extractNumber(txtHoTen.getText()) == 0) {
-            JOptionPane.showMessageDialog(rootPane, "Họ tên nhập sai định dạng. Nhập Lại, ví dụ: Nguyễn Văn A");
 
+        if (extractNumber(txtHoTen.getText()) == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng tên không chứa số; Ví du: Nguyễn Văn A");
+            txtHoTen.requestFocus();
         }
     }//GEN-LAST:event_txtHoTenFocusLost
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(){
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void txtCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCMNDFocusLost
+        //Xử lý số chướng minh nhân dân 
+        if (extractNumber(txtCMND.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập số chứng minh nhân dân  đúng định dạng");
+            txtCMND.requestFocus();
+        }
+
+    }//GEN-LAST:event_txtCMNDFocusLost
+
+    private void txtSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTFocusLost
+        if (extractNumber(txtSDT.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng số điện thoại");
+            txtSDT.requestFocus();
+        }
+    }//GEN-LAST:event_txtSDTFocusLost
+
+    private void txtTuoiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuoiFocusLost
+
+        if (extractNumber(txtTuoi.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập Tuổi đúng định dạng");
+            txtTuoi.requestFocus();
+        }
+    }//GEN-LAST:event_txtTuoiFocusLost
+
+    private void ButunReset5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButunReset5ActionPerformed
+
+    private void ButunReset5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset5MouseClicked
+        // TODO add your handling code here:
+        XoaForm.main();
+    }//GEN-LAST:event_ButunReset5MouseClicked
+
+    public static void main(String[] args) {
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -589,11 +603,6 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NhapThongTinKhachHangForm().setVisible(true);
@@ -607,6 +616,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     private javax.swing.JButton ButunReset2;
     private javax.swing.JButton ButunReset3;
     private javax.swing.JButton ButunReset4;
+    private javax.swing.JButton ButunReset5;
     private javax.swing.JComboBox<String> boxPhuongThuThanhToan;
     private javax.swing.JButton buttunLuu;
     private javax.swing.JLabel jLabel1;

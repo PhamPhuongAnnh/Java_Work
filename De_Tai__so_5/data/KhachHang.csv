@@ -1,10 +1,5 @@
-
 Ma KH,Ho Ten,So CMND,SĐT,Tuoi,PTTT
-0,s,1,1,1,Thanh toan bang tien mat
-Ma KH,Ho Ten,So CMND,SĐT,Tuoi,PTTT
-0,b,1,3,3,Thanh toan thanh the
-Ma KH,Ho Ten,So CMND,SĐT,Tuoi,PTTT
-0,w,1,1,1,Thanh toan thanh the
-Ma KH,Ho Ten,So CMND,SĐT,Tuoi,PTTT
-0,Pham Anh,1,1,1,Thanh toan bang tien mat
-1,w,1,1,1,Thanh toan bang tien mat
+0,a,1,2,3,Thanh toan bang tien mat
+1,b,1,2,3,Thanh toan bang tien mat
+2,c,1,2,3,Thanh toan bang tien mat
+3,d,3,4,2,Thanh toan bang tien mat
