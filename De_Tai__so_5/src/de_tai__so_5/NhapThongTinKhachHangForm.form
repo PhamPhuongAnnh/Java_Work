@@ -91,32 +91,32 @@
                               <Component id="txtSDT" alignment="0" pref="310" max="32767" attributes="0"/>
                               <Component id="boxPhuongThuThanhToan" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                           <Component id="buttunLuu" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="ButunReset6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="ButunReset6" min="-2" pref="123" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="ButunReset" min="-2" pref="108" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="908" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="ButunReset" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                           <Component id="ButunReset1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="ButunReset2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                           <Component id="ButunReset4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                           <Component id="ButunReset5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -165,13 +165,13 @@
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ButunReset5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ButunReset6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="buttunLuu" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButunReset6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButunReset5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
               </Group>
@@ -339,9 +339,9 @@
                   <Table columnCount="6" rowCount="0">
                     <Column editable="true" title="M&#xe3; KH" type="java.lang.Object"/>
                     <Column editable="true" title="H&#x1ecd; t&#xea;n" type="java.lang.Object"/>
-                    <Column editable="true" title="S&#x1ed1; CMND" type="java.lang.Object"/>
                     <Column editable="true" title="S&#x110;T" type="java.lang.Object"/>
-                    <Column editable="true" title="Tu&#x1ed5;i" type="java.lang.Object"/>
+                    <Column editable="false" title="Tu&#x1ed5;i" type="java.lang.Object"/>
+                    <Column editable="true" title="S&#x1ed1; CMND" type="java.lang.Object"/>
                     <Column editable="true" title="PTTT" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -357,12 +357,12 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -418,6 +418,7 @@
             <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButunReset2MouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButunReset2ActionPerformed"/>
           </Events>
         </Component>

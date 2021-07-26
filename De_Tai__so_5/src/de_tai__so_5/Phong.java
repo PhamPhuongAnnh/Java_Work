@@ -11,20 +11,19 @@ package de_tai__so_5;
  */
 public class Phong {
     
-     private int maPhong;
+    private int maPhong;
     private int soTang;
     
-    private String trangThai;
-    private String loaiPhong;
+   
+    private int loaiPhong;
     private double giaPhong;
 
     public Phong() {
     }
 
-    public Phong(int maPhong, int soTang, String trangThai, String loaiPhong, double giaPhong) {
+    public Phong(int maPhong, int soTang, int loaiPhong, double giaPhong) {
         this.maPhong = maPhong;
         this.soTang = soTang;
-        this.trangThai = trangThai;
         this.loaiPhong = loaiPhong;
         this.giaPhong = giaPhong;
     }
@@ -44,20 +43,11 @@ public class Phong {
     public void setSoTang(int soTang) {
         this.soTang = soTang;
     }
-
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-    public String getLoaiPhong() {
+    public int getLoaiPhong() {
         return loaiPhong;
     }
 
-    public void setLoaiPhong(String loaiPhong) {
+    public void setLoaiPhong(int loaiPhong) {
         this.loaiPhong = loaiPhong;
     }
 

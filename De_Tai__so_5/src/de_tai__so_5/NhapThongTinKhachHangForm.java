@@ -208,10 +208,22 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã KH", "Họ tên", "Số CMND", "SĐT", "Tuổi", "PTTT"
+                "Mã KH", "Họ tên", "SĐT", "Tuổi", "Số CMND", "PTTT"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblKhachHang);
+        if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
+            tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         ButunReset1.setBackground(new java.awt.Color(204, 204, 204));
         ButunReset1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -232,6 +244,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         ButunReset2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButunReset2.setIcon(new javax.swing.ImageIcon("D:\\img\\chinhSua.png")); // NOI18N
         ButunReset2.setText("Chỉnh sửa");
+        ButunReset2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButunReset2MouseClicked(evt);
+            }
+        });
         ButunReset2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButunReset2ActionPerformed(evt);
@@ -303,29 +320,29 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                             .addComponent(txtCMND, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                             .addComponent(txtTuoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                             .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                            .addComponent(boxPhuongThuThanhToan, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(boxPhuongThuThanhToan, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addComponent(buttunLuu)
+                        .addGap(44, 44, 44)
+                        .addComponent(ButunReset6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(ButunReset, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButunReset6)
-                        .addGap(93, 93, 93)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(ButunReset)
-                        .addGap(87, 87, 87)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
                         .addComponent(ButunReset1)
-                        .addGap(103, 103, 103)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ButunReset2)
-                        .addGap(82, 82, 82)
+                        .addGap(99, 99, 99)
                         .addComponent(ButunReset4)
-                        .addGap(102, 102, 102)
+                        .addGap(83, 83, 83)
                         .addComponent(ButunReset5)
-                        .addGap(59, 59, 59))))
+                        .addGap(177, 177, 177))))
             .addComponent(jSeparator1)
         );
         jPanel1Layout.setVerticalGroup(
@@ -361,13 +378,13 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButunReset5)
                     .addComponent(ButunReset4)
                     .addComponent(ButunReset2)
                     .addComponent(ButunReset1)
                     .addComponent(ButunReset)
+                    .addComponent(buttunLuu)
                     .addComponent(ButunReset6)
-                    .addComponent(buttunLuu))
+                    .addComponent(ButunReset5))
                 .addGap(190, 190, 190))
         );
 
@@ -517,7 +534,8 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunReset1ActionPerformed
 
     private void ButunReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset2ActionPerformed
-        // TODO add your handling code here:
+       // chỉnh sửa
+       
     }//GEN-LAST:event_ButunReset2ActionPerformed
 
     private void ButunReset3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset3ActionPerformed
@@ -621,6 +639,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_ButunReset6MouseClicked
+
+    private void ButunReset2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset2MouseClicked
+        // TODO add your handling code here:
+        ChinhSuaForm.main();
+    }//GEN-LAST:event_ButunReset2MouseClicked
 
     public static void main(String[] args) {
 
