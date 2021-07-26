@@ -5,6 +5,12 @@
  */
 package de_tai__so_5;
 
+import com.opencsv.exceptions.CsvValidationException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,6 +22,10 @@ public class XoaForm extends javax.swing.JFrame {
     /**
      * Creates new form XoaForm
      */
+    private static final String curentDir = System.getProperty("user.dir");
+    private static final String separator = File.separator;
+    private static final String PATH_FILE_CSV = curentDir + separator + "data" + separator + "KhachHang.csv";
+
     public XoaForm() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,10 +42,10 @@ public class XoaForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtXoa = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(48, 62, 80));
 
@@ -43,10 +53,10 @@ public class XoaForm extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nhập mã khách hàng cần xóa:");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtXoa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtXoaActionPerformed(evt);
             }
         });
 
@@ -66,7 +76,7 @@ public class XoaForm extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -76,7 +86,7 @@ public class XoaForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -102,13 +112,39 @@ public class XoaForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXoaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
+    }//GEN-LAST:event_txtXoaActionPerformed
+    List<khachHang> danhSachKhachHang = new ArrayList<>();
+    DocGhiFile dc = new DocGhiFile();
+    static File f = new File(PATH_FILE_CSV);
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(rootPane, "Bạn đã xóa thành công");
+        khachHang khacHang = null;
+
+        try {
+            //xóa thông tin
+            danhSachKhachHang = dc.docFile();
+            for (int i = 0; i < danhSachKhachHang.size(); i++) {
+                if (danhSachKhachHang.get(i).getMaKhachHang() == Integer.parseInt(txtXoa.getText())) {
+                    khacHang = danhSachKhachHang.get(i);
+                    danhSachKhachHang.remove(khacHang);
+
+                    break;
+
+                }
+            }
+            int id = 0;
+            for (int i = 0; i < danhSachKhachHang.size(); i++) {
+                danhSachKhachHang.get(i).setMaKhachHang(id++);
+            }
+            f.delete();
+            dc.ghiFile(danhSachKhachHang);
+            JOptionPane.showMessageDialog(rootPane, "Bạn đã xóa thành công");
+
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(XoaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -151,6 +187,6 @@ public class XoaForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtXoa;
     // End of variables declaration//GEN-END:variables
 }
