@@ -139,7 +139,7 @@
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                   <Component id="ButunReset2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                  <Component id="ButunReset4" min="-2" max="-2" attributes="0"/>
+                  <Component id="hienthi" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                   <Component id="ButunReset5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
@@ -181,7 +181,7 @@
                       <Component id="buttunLuu" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ButunReset4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="hienthi" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -368,7 +368,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButunResetActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ButunReset4">
+        <Component class="javax.swing.JButton" name="hienthi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -382,8 +382,8 @@
             <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb;"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButunReset4MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButunReset4ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="hienthiMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hienthiActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ButunReset2">

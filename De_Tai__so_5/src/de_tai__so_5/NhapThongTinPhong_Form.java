@@ -35,6 +35,12 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); // center for in the screen
         tableModel = (DefaultTableModel) tblPhong.getModel();
+
+        try { 
+            hienTHi(dc.docFilePhong());
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(NhapThongTinPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -63,7 +69,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         loaiPhong = new javax.swing.JComboBox<>();
         ButunReset6 = new javax.swing.JButton();
         ButunReset = new javax.swing.JButton();
-        ButunReset4 = new javax.swing.JButton();
+        hienthi = new javax.swing.JButton();
         ButunReset2 = new javax.swing.JButton();
         ButunReset1 = new javax.swing.JButton();
         ButunReset5 = new javax.swing.JButton();
@@ -188,18 +194,18 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
             }
         });
 
-        ButunReset4.setBackground(new java.awt.Color(204, 204, 204));
-        ButunReset4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        ButunReset4.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
-        ButunReset4.setText("Hiển thị");
-        ButunReset4.addMouseListener(new java.awt.event.MouseAdapter() {
+        hienthi.setBackground(new java.awt.Color(204, 204, 204));
+        hienthi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        hienthi.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
+        hienthi.setText("Hiển thị");
+        hienthi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ButunReset4MouseClicked(evt);
+                hienthiMouseClicked(evt);
             }
         });
-        ButunReset4.addActionListener(new java.awt.event.ActionListener() {
+        hienthi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButunReset4ActionPerformed(evt);
+                hienthiActionPerformed(evt);
             }
         });
 
@@ -279,7 +285,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addComponent(ButunReset2)
                 .addGap(68, 68, 68)
-                .addComponent(ButunReset4)
+                .addComponent(hienthi)
                 .addGap(89, 89, 89)
                 .addComponent(ButunReset5)
                 .addGap(148, 148, 148))
@@ -312,7 +318,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
                     .addComponent(buttunLuu)
                     .addComponent(ButunReset6)
                     .addComponent(ButunReset)
-                    .addComponent(ButunReset4)
+                    .addComponent(hienthi)
                     .addComponent(ButunReset2)
                     .addComponent(ButunReset1)
                     .addComponent(ButunReset5))
@@ -342,7 +348,20 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton3ActionPerformed
+    public void hienTHi(List<Phong> phong) {
+            tableModel.setRowCount(0);
+            for (Phong item : phong) {
+                int maPhong = item.getMaPhong();
+                int SoTang = item.getSoTang();
+                int sucChua = item.getLoaiPhong();
+                double giaPhong = item.getGiaPhong();
 
+                tableModel.addRow(new Object[]{maPhong, SoTang, sucChua, giaPhong});
+            }
+
+        
+
+    }
     private void buttunLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuuActionPerformed
         try {
             if (!f.exists()) {
@@ -368,8 +387,10 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
                 Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             danhPhong.add(phong);
-
         }
+
+        hienTHi(danhPhong);
+
 
     }//GEN-LAST:event_buttunLuuActionPerformed
 
@@ -399,33 +420,24 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         txtGiaPhong.setText("");
     }//GEN-LAST:event_ButunResetActionPerformed
 
-    private void ButunReset4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset4MouseClicked
-        try {
-            //hiển thị thông tin
-            List<Phong> list = dc.docFilePhong();
-            for (Phong item : list) {
-                int maPhong = item.getMaPhong();
-                int SoTang = item.getSoTang();
-                int sucChua = item.getLoaiPhong();
-                double giaPhong = item.getGiaPhong();
-
-                tableModel.addRow(new Object[]{maPhong, SoTang, sucChua, giaPhong});
-
-            }
-
-        } catch (CsvValidationException ex) {
-            Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
+    private void hienthiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hienthiMouseClicked
+        tableModel.setRowCount(0);
+        for (Phong item : danhPhong) {
+            int maPhong = item.getMaPhong();
+            int SoTang = item.getSoTang();
+            int sucChua = item.getLoaiPhong();
+            double giaPhong = item.getGiaPhong();
+            tableModel.addRow(new Object[]{maPhong, SoTang, sucChua, giaPhong});
         }
+    }//GEN-LAST:event_hienthiMouseClicked
 
-    }//GEN-LAST:event_ButunReset4MouseClicked
-
-    private void ButunReset4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset4ActionPerformed
+    private void hienthiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hienthiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ButunReset4ActionPerformed
+    }//GEN-LAST:event_hienthiActionPerformed
 
     private void ButunReset2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset2MouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_ButunReset2MouseClicked
 
     private void ButunReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset2ActionPerformed
@@ -490,10 +502,10 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
     private javax.swing.JButton ButunReset;
     private javax.swing.JButton ButunReset1;
     private javax.swing.JButton ButunReset2;
-    private javax.swing.JButton ButunReset4;
     private javax.swing.JButton ButunReset5;
     private javax.swing.JButton ButunReset6;
     private javax.swing.JButton buttunLuu;
+    private javax.swing.JButton hienthi;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
