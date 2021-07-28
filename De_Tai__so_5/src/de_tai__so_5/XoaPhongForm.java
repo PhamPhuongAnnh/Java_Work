@@ -123,7 +123,7 @@ public class XoaPhongForm extends javax.swing.JFrame {
             //xóa thông tin
             danhSachPhong = dc.docFilePhong();
             for (int i = 0; i < danhSachPhong.size(); i++) {
-                if (danhSachPhong.get(i).getMaPhong() == Integer.parseInt(txtXoa.getText())) {
+                if (danhSachPhong.get(i).getMaPhong() == txtXoa.getText()) {
                     phong = danhSachPhong.get(i);
                     danhSachPhong.remove(phong);
 
@@ -133,7 +133,7 @@ public class XoaPhongForm extends javax.swing.JFrame {
             }
             int id = 0;
             for (int i = 0; i < danhSachPhong.size(); i++) {
-                danhSachPhong.get(i).setMaPhong(id++);
+                danhSachPhong.get(i).setMaPhong("Phong "+ id++);
             }
             f.delete();
             dc.ghiFilePhong(danhSachPhong);

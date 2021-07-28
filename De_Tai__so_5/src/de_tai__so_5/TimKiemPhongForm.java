@@ -189,9 +189,9 @@ public class TimKiemPhongForm extends javax.swing.JFrame {
             List<Phong> list = dc.docFilePhong();
             boolean flag = false;
             for (Phong item : list) {
-                if (item.getMaPhong() == Integer.parseInt(txtTimMA.getText())) {
+                if (item.getMaPhong() == txtTimMA.getText()) {
                     flag = true;
-                    int maPhong = item.getMaPhong();
+                    String maPhong = item.getMaPhong();
                     int soTang = item.getSoTang();
                     int loai = item.getLoaiPhong();
                     double gia = item.getGiaPhong();

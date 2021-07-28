@@ -36,10 +36,21 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         this.setLocationRelativeTo(null); // center for in the screen
         tableModel = (DefaultTableModel) tblPhong.getModel();
 
-        try { 
+        try {
             hienTHi(dc.docFilePhong());
         } catch (CsvValidationException ex) {
             Logger.getLogger(NhapThongTinPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void hienTHi(List<Phong> phong) {
+        tableModel.setRowCount(0);
+        for (Phong item : phong) {
+            String maPhong = item.getMaPhong();
+            int SoTang = item.getSoTang();
+            int sucChua = item.getLoaiPhong();
+            double giaPhong = item.getGiaPhong();
+            tableModel.addRow(new Object[]{maPhong, SoTang, sucChua, giaPhong});
         }
     }
 
@@ -348,20 +359,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jButton3ActionPerformed
-    public void hienTHi(List<Phong> phong) {
-            tableModel.setRowCount(0);
-            for (Phong item : phong) {
-                int maPhong = item.getMaPhong();
-                int SoTang = item.getSoTang();
-                int sucChua = item.getLoaiPhong();
-                double giaPhong = item.getGiaPhong();
 
-                tableModel.addRow(new Object[]{maPhong, SoTang, sucChua, giaPhong});
-            }
-
-        
-
-    }
     private void buttunLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuuActionPerformed
         try {
             if (!f.exists()) {
@@ -373,7 +371,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         } catch (CsvValidationException ex) {
             Logger.getLogger(NhapThongTinPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int maPhong = id++;
+        String maPhong = "Phong " + id++;
         int soTang = Integer.parseInt(txtSoTang.getText());
         int sucChua = Integer.parseInt(loaiPhong.getSelectedItem().toString());
         double giaPhong = Double.parseDouble(txtGiaPhong.getText());
@@ -390,8 +388,6 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         }
 
         hienTHi(danhPhong);
-
-
     }//GEN-LAST:event_buttunLuuActionPerformed
 
     private void buttunLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttunLuuMouseClicked
@@ -423,7 +419,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
     private void hienthiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hienthiMouseClicked
         tableModel.setRowCount(0);
         for (Phong item : danhPhong) {
-            int maPhong = item.getMaPhong();
+            String maPhong = item.getMaPhong();
             int SoTang = item.getSoTang();
             int sucChua = item.getLoaiPhong();
             double giaPhong = item.getGiaPhong();

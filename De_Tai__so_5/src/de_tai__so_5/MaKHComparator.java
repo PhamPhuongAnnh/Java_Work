@@ -15,7 +15,7 @@ public class MaKHComparator implements Comparator<DatPhong>{
 
     @Override
     public int compare(DatPhong o1, DatPhong o2) {
-        return  o1.getMaKhachHang()-o2.getMaKhachHang();
+        return  o1.getMaKhachHang().compareTo(o2.getMaKhachHang());
     }
     
 }

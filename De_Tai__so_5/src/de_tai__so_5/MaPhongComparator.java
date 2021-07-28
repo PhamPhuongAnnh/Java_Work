@@ -15,7 +15,7 @@ public class MaPhongComparator implements Comparator<DatPhong>{
 
    @Override
     public int compare(DatPhong o1, DatPhong o2) {
-        return o1.getMaPhong()-o2.getMaPhong();
+        return o1.getMaPhong().compareTo(o2.getMaPhong());
     }
 
     

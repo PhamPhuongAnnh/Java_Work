@@ -11,7 +11,7 @@ package de_tai__so_5;
  */
 public class Phong {
     
-    private int maPhong;
+    private String maPhong;
     private int soTang;
     
    
@@ -21,18 +21,18 @@ public class Phong {
     public Phong() {
     }
 
-    public Phong(int maPhong, int soTang, int loaiPhong, double giaPhong) {
+    public Phong(String maPhong, int soTang, int loaiPhong, double giaPhong) {
         this.maPhong = maPhong;
         this.soTang = soTang;
         this.loaiPhong = loaiPhong;
         this.giaPhong = giaPhong;
     }
 
-    public int getMaPhong() {
+    public String getMaPhong() {
         return maPhong;
     }
 
-    public void setMaPhong(int maPhong) {
+    public void setMaPhong(String maPhong) {
         this.maPhong = maPhong;
     }
 

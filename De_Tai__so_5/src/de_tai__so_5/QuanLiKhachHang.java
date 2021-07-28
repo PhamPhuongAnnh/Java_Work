@@ -48,9 +48,9 @@ public class QuanLiKhachHang {
     }
 
     // nhập Mã khác hàng
-    public int nhapMaKhachHang() {
+    public String nhapMaKhachHang() {
         System.out.println("Nhap Ma Khac Hang: ");
-        return new Scanner(System.in).nextInt();
+        return new Scanner(System.in).nextLine();
     }
 
     //   nhập họ tên khách hàng;
@@ -85,7 +85,7 @@ public class QuanLiKhachHang {
 
     // Thêm thông tin 1 khách hàng
     public void add() {
-        int maKhachHang = nhapMaKhachHang();
+        String maKhachHang = nhapMaKhachHang();
         String hoTenKhachHang = nhapHoTenKhachHang();
         int tuoi = nhapTuoi();
         int soCMND = nhapSoCMND();
@@ -101,7 +101,7 @@ public class QuanLiKhachHang {
         boolean flag = false;
         System.out.println("Sua Ten Khach Hang: ");
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getMaKhachHang() == (makhachHang)) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(makhachHang)) {
                 flag = true;
                 danhSachKhachHang.get(i).setHoTen(new Scanner(System.in).nextLine());
             }
@@ -117,7 +117,7 @@ public class QuanLiKhachHang {
         boolean flag = false;
         System.out.println("Sua Tuoi Khach Hang: ");
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getMaKhachHang() == (makhachHang)) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(makhachHang)) {
                 flag = true;
                 danhSachKhachHang.get(i).setTuoi(new Scanner(System.in).nextInt());
             }
@@ -133,7 +133,7 @@ public class QuanLiKhachHang {
         boolean flag = false;
         System.out.println("Sua So CMND/TCC Khach Hang: ");
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getMaKhachHang() == (makhachHang)) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(makhachHang)) {
                 flag = true;
                 danhSachKhachHang.get(i).setCMND(new Scanner(System.in).nextInt());
             }
@@ -149,7 +149,7 @@ public class QuanLiKhachHang {
         boolean flag = false;
         System.out.println("Sua SDT Khach Hang: ");
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getMaKhachHang() == (makhachHang)) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(makhachHang)) {
                 flag = true;
                 danhSachKhachHang.get(i).setSDT(new Scanner(System.in).nextInt());
             }
@@ -165,7 +165,7 @@ public class QuanLiKhachHang {
         boolean flag = false;
         System.out.println("Sua Phuong Thuc Thanh Toan : ");
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getMaKhachHang() == (makhachHang)) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(makhachHang)) {
                 flag = true;
                 danhSachKhachHang.get(i).setPhuongThucThanhToan(new Scanner(System.in).nextLine());
             }
@@ -180,7 +180,7 @@ public class QuanLiKhachHang {
     public void xoaThongTin(int maKhachHang) {
         khachHang khacHang = null;
         for (int i = 0; i < danhSachKhachHang.size(); i++) {
-            if (danhSachKhachHang.get(i).getMaKhachHang()== (maKhachHang)) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(maKhachHang)) {
                 khacHang = danhSachKhachHang.get(i);
                 break;
             }

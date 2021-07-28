@@ -160,8 +160,8 @@ public class TimKiemForm extends javax.swing.JFrame {
             List<khachHang> list = dc.docFile();
             boolean flag = false;
             for (khachHang item : list) {
-                if (item.getMaKhachHang() == Integer.parseInt(txtTimMA.getText())) {
-                    int maKH = item.getMaKhachHang();
+                if (item.getMaKhachHang() == txtTimMA.getText()) {
+                    String maKH = item.getMaKhachHang();
                     String hoTen = item.getHoTen();
                     int SoCMND = item.getCMND();
                     int soDT = item.getSDT();

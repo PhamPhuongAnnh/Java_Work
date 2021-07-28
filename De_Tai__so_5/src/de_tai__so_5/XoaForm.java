@@ -118,27 +118,32 @@ public class XoaForm extends javax.swing.JFrame {
     List<khachHang> danhSachKhachHang = new ArrayList<>();
     DocGhiFile dc = new DocGhiFile();
     static File f = new File(PATH_FILE_CSV);
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         khachHang khacHang = null;
 
         try {
             //xóa thông tin
-            danhSachKhachHang = dc.docFile();
-            for (int i = 0; i < danhSachKhachHang.size(); i++) {
-                if (danhSachKhachHang.get(i).getMaKhachHang() == Integer.parseInt(txtXoa.getText())) {
-                    khacHang = danhSachKhachHang.get(i);
+            danhSachKhachHang = dc.docFile(); 
+            System.out.println(txtXoa.getText());
+   for(khachHang item: danhSachKhachHang){
+       if(item.getMaKhachHang().equals(txtXoa.getText())){
+             System.out.println(item.getMaKhachHang());
+                    khacHang = item;
                     danhSachKhachHang.remove(khacHang);
-
                     break;
-
-                }
-            }
-            int id = 0;
-            for (int i = 0; i < danhSachKhachHang.size(); i++) {
-                danhSachKhachHang.get(i).setMaKhachHang(id++);
-            }
-            f.delete();
+       }
+   }              
+//            for (int i = danhSachKhachHang.size()-1 ; i >=0 ; i--) {
+//                if (danhSachKhachHang.get(i).getMaKhachHang().equals(txtXoa.getText())) {
+//                    System.out.println(danhSachKhachHang.get(i).getMaKhachHang());
+//                    khacHang = danhSachKhachHang.get(i);
+//                    danhSachKhachHang.remove(khacHang);
+//                    break;
+//                }
+//            }
             dc.ghiFile(danhSachKhachHang);
+            
             JOptionPane.showMessageDialog(rootPane, "Bạn đã xóa thành công");
 
         } catch (CsvValidationException ex) {

@@ -10,14 +10,14 @@ package de_tai__so_5;
  * @author phuon
  */
 public class khachHang {
-    private int maKhachHang;
+    private String maKhachHang;
     private String hoTen;
     private int Tuoi;
     private int CMND;
     private int SDT;
     private String phuongThucThanhToan;
 
-    public khachHang(int maKhachHang, String hoTen, int Tuoi, int CMND, int SDT, String phuongThucThanhToan) {
+    public khachHang(String maKhachHang, String hoTen, int Tuoi, int CMND, int SDT, String phuongThucThanhToan) {
         this.maKhachHang = maKhachHang;
         this.hoTen = hoTen;
         this.Tuoi = Tuoi;
@@ -32,11 +32,11 @@ public class khachHang {
   
    
 
-    public int getMaKhachHang() {
+    public String getMaKhachHang() {
         return maKhachHang;
     }
 
-    public void setMaKhachHang(int maKhachHang) {
+    public void setMaKhachHang(String maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
 

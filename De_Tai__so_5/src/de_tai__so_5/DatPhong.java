@@ -15,14 +15,14 @@ class DatPhong {
 //    maDatPhong, maPhong, maKhachHang, ngayDat, ngayTra, TongTien);
    
 
-    private int maDatPhong;
-    private int maPhong;
-    private int maKhachHang;
+    private String maDatPhong;
+    private String maPhong;
+    private String maKhachHang;
     private Date ngayDat;
     private Date ngayTra;
     private int tongTien;
 
-    public DatPhong(int maDatPhong, int maPhong, int maKhachHang, Date ngayDat, Date ngayTra, int tongTien) {
+    public DatPhong(String maDatPhong, String maPhong, String maKhachHang, Date ngayDat, Date ngayTra, int tongTien) {
         this.maDatPhong = maDatPhong;
         this.maPhong = maPhong;
         this.maKhachHang = maKhachHang;
@@ -34,27 +34,27 @@ class DatPhong {
     public DatPhong() {
     }
 
-    public int getMaDatPhong() {
+    public String getMaDatPhong() {
         return maDatPhong;
     }
 
-    public void setMaDatPhong(int maDatPhong) {
+    public void setMaDatPhong(String maDatPhong) {
         this.maDatPhong = maDatPhong;
     }
 
-    public int getMaPhong() {
+    public String getMaPhong() {
         return maPhong;
     }
 
-    public void setMaPhong(int maPhong) {
+    public void setMaPhong(String maPhong) {
         this.maPhong = maPhong;
     }
 
-    public int getMaKhachHang() {
+    public String getMaKhachHang() {
         return maKhachHang;
     }
 
-    public void setMaKhachHang(int maKhachHang) {
+    public void setMaKhachHang(String maKhachHang) {
         this.maKhachHang = maKhachHang;
     }
 

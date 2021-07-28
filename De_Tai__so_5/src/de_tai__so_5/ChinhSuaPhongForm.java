@@ -237,9 +237,9 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
             List<Phong> list = dc.docFilePhong();
             boolean flag = false;
             for (Phong item : list) {
-                if (item.getMaPhong() == Integer.parseInt(txtSua.getText())) {
+                if (item.getMaPhong() == txtSua.getText()) {
                     flag = true;
-                    txtMa.setText(Integer.toString(item.getMaPhong()));
+                    txtMa.setText(item.getMaPhong());
                     txtTang.setText(Integer.toString(item.getSoTang()));
                     txtLoai.setText(Integer.toString(item.getLoaiPhong()));
                     txtGia.setText(Double.toString(item.getGiaPhong()));
@@ -261,12 +261,12 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
         try {
             danhPhong = dc.docFilePhong();
             f.delete();
-            int maPhong = Integer.parseInt(txtMa.getText());
+            String maPhong = txtMa.getText();
 //            int tang = Integer.parseInt(txtTang.getText());
 //            int loaiPhong = Integer.parseInt(txtLoai.getText());
             double gia = Double.parseDouble(txtGia.getText());
             for (Phong item : danhPhong) {
-                if (item.getMaPhong() == maPhong) {
+                if (item.getMaPhong().equals(maPhong)) {
                     item.setGiaPhong(gia);
                 }
             }

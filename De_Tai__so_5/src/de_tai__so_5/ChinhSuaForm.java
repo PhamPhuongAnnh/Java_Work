@@ -1,6 +1,7 @@
 package de_tai__so_5;
 
 import com.opencsv.exceptions.CsvValidationException;
+import static de_tai__so_5.NhapThongTinKhachHangForm.f;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,15 @@ public class ChinhSuaForm extends javax.swing.JFrame {
     public ChinhSuaForm() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setTitle("Chinh sư thong tin");
+        this.setTitle("Chinh sưa thong tin");
+        if (f.exists()) {
+            try {
+                danhSachKhachHang = dc.docFile();
+            } catch (CsvValidationException ex) {
+                Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +38,7 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtMa = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -40,11 +49,12 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         txtSoDT = new javax.swing.JTextField();
         txtPTTT = new javax.swing.JTextField();
         txtTuoi = new javax.swing.JTextField();
-        txtLuu = new javax.swing.JButton();
+        btnChinhSua = new javax.swing.JButton();
         btnBoQua = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        txtSua = new javax.swing.JTextField();
-        btnchinhSua = new javax.swing.JButton();
+        txtMaKhachHang = new javax.swing.JTextField();
+        btnHienTHi = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,7 +85,7 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mã KH:");
 
-        txtMa.setEditable(false);
+        txtMaKH.setEditable(false);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -99,11 +109,11 @@ public class ChinhSuaForm extends javax.swing.JFrame {
 
         txtPTTT.setEditable(false);
 
-        txtLuu.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        txtLuu.setText("Chỉnh sửa");
-        txtLuu.addActionListener(new java.awt.event.ActionListener() {
+        btnChinhSua.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnChinhSua.setText("Chỉnh sửa");
+        btnChinhSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLuuActionPerformed(evt);
+                btnChinhSuaActionPerformed(evt);
             }
         });
 
@@ -119,11 +129,24 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nhập mã KH cần sửa:");
 
-        btnchinhSua.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btnchinhSua.setText("Hiển thị");
-        btnchinhSua.addActionListener(new java.awt.event.ActionListener() {
+        btnHienTHi.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnHienTHi.setText("Hiển thị");
+        btnHienTHi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnchinhSuaActionPerformed(evt);
+                btnHienTHiActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnXoa.setText("Xóa");
+        btnXoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnXoaMouseClicked(evt);
+            }
+        });
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
             }
         });
 
@@ -131,14 +154,18 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnHienTHi)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(87, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtLuu)
-                        .addGap(127, 127, 127)
-                        .addComponent(btnBoQua))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -152,17 +179,16 @@ public class ChinhSuaForm extends javax.swing.JFrame {
                             .addComponent(txtSoDT, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSoCMND, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(116, 116, 116))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(txtSua, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(btnchinhSua)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(116, 116, 116))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnChinhSua)
+                        .addGap(69, 69, 69)
+                        .addComponent(btnXoa)
+                        .addGap(83, 83, 83)
+                        .addComponent(btnBoQua)
+                        .addGap(84, 84, 84))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,11 +196,11 @@ public class ChinhSuaForm extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtSua, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnchinhSua))
+                    .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHienTHi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -196,11 +222,12 @@ public class ChinhSuaForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPTTT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLuu)
-                    .addComponent(btnBoQua))
-                .addGap(20, 20, 20))
+                    .addComponent(btnChinhSua)
+                    .addComponent(btnBoQua)
+                    .addComponent(btnXoa))
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,54 +249,52 @@ public class ChinhSuaForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
   List<khachHang> danhSachKhachHang = new ArrayList<>();
     File f = new File(PATH_FILE_CSV);
-    private void txtLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLuuActionPerformed
-        try {
-            danhSachKhachHang = dc.docFile();
-            f.delete();
-            int maKhachHang = Integer.parseInt(txtMa.getText());
-            String HotenKhachHang = txtHoTen.getText();
-            int tuoi = Integer.parseInt(txtTuoi.getText());
-            int scmnd = Integer.parseInt(txtSoCMND.getText());
-            int sdt = Integer.parseInt(txtSoDT.getText());
-            String phuongTTT = txtPTTT.getText();
-            for (khachHang item : danhSachKhachHang) {
-                if (item.getMaKhachHang() == maKhachHang) {
-                    item.setHoTen(HotenKhachHang);
-                    item.setTuoi(tuoi);
-                    item.setCMND(scmnd);
-                    item.setSDT(sdt);
-                    item.setPhuongThucThanhToan(phuongTTT); 
-                }
+    private void btnChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSuaActionPerformed
+
+        String maKhachHang = txtMaKH.getText();
+        String HotenKhachHang = txtHoTen.getText();
+        int tuoi = Integer.parseInt(txtTuoi.getText());
+        int scmnd = Integer.parseInt(txtSoCMND.getText());
+        int sdt = Integer.parseInt(txtSoDT.getText());
+        String phuongTTT = txtPTTT.getText();
+        int check = 0;
+        for (khachHang item : danhSachKhachHang) {
+            if (item.getMaKhachHang().equals(maKhachHang)) {
+                item.setHoTen(HotenKhachHang);
+                item.setTuoi(tuoi);
+                item.setCMND(scmnd);
+                item.setSDT(sdt);
+                item.setPhuongThucThanhToan(phuongTTT);
+                check = 1;
             }
-            dc.ghiFile(danhSachKhachHang);
-        } catch (CsvValidationException ex) {
-            Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-
-        JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
-
-    }//GEN-LAST:event_txtLuuActionPerformed
+        if (check == 1) {
+            f.delete();
+            dc.ghiFile(danhSachKhachHang);
+            JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy khách hàng cần sử");
+        }
+    }//GEN-LAST:event_btnChinhSuaActionPerformed
 
     private void btnBoQuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoQuaActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnBoQuaActionPerformed
     int id;
-    private void btnchinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchinhSuaActionPerformed
-//      chỉnh sưa
+    private void btnHienTHiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHienTHiActionPerformed
         try {
-
             List<khachHang> list = dc.docFile();
             boolean flag = false;
             for (khachHang item : list) {
-                if (item.getMaKhachHang() == Integer.parseInt(txtSua.getText())) {
+                if (item.getMaKhachHang().equals(txtMaKhachHang.getText())) {
                     flag = true;
-                    txtMa.setText(Integer.toString(item.getMaKhachHang()));
+                    txtMaKH.setText(item.getMaKhachHang());
                     txtHoTen.setText(item.getHoTen());
                     txtSoDT.setText(Integer.toString(item.getSDT()));
                     txtSoCMND.setText(Integer.toString(item.getCMND()));
                     txtTuoi.setText(Integer.toString(item.getTuoi()));
                     txtPTTT.setText(item.getPhuongThucThanhToan());
-
                 }
 
             }
@@ -280,7 +305,31 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         } catch (CsvValidationException ex) {
             Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnchinhSuaActionPerformed
+    }//GEN-LAST:event_btnHienTHiActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnXoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXoaMouseClicked
+//        xóa 
+        String maKhachHang = txtMaKhachHang.getText();
+        int check = 0;
+        for (int i = 0; i < danhSachKhachHang.size(); i++) {
+            if (danhSachKhachHang.get(i).getMaKhachHang().equals(txtMaKhachHang.getText())) {
+                danhSachKhachHang.remove(danhSachKhachHang.get(i));
+                check = 1;
+                break;
+            }
+        }
+        if (check == 1) {
+            f.delete();
+            dc.ghiFile(danhSachKhachHang);
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Không tìm thấy khách hàng cần xóa");
+        }
+    }//GEN-LAST:event_btnXoaMouseClicked
 
     public static void main() {
         try {
@@ -308,7 +357,9 @@ public class ChinhSuaForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBoQua;
-    private javax.swing.JButton btnchinhSua;
+    private javax.swing.JButton btnChinhSua;
+    private javax.swing.JButton btnHienTHi;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,12 +371,11 @@ public class ChinhSuaForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtHoTen;
-    private javax.swing.JButton txtLuu;
-    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtMaKH;
+    private javax.swing.JTextField txtMaKhachHang;
     private javax.swing.JTextField txtPTTT;
     private javax.swing.JTextField txtSoCMND;
     private javax.swing.JTextField txtSoDT;
-    private javax.swing.JTextField txtSua;
     private javax.swing.JTextField txtTuoi;
     // End of variables declaration//GEN-END:variables
 }

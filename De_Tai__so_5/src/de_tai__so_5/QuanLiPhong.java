@@ -33,15 +33,15 @@ public class QuanLiPhong {
     }
 
     //nhập mã phòng
-    public int nhapMaPhong() {
+    public String nhapMaPhong() {
         System.out.println("Nhập Mã Phòng");
-        return sc.nextInt();
+        return sc.nextLine();
     }
 
     //nhập mã khách hàn
-    public int nhapKhachHang() {
+    public String nhapKhachHang() {
         System.out.println("Nhập Khách Hàng");
-        return sc.nextInt();
+        return sc.nextLine();
     }
 
     //nhập mã Tổng tiền
@@ -74,9 +74,9 @@ public class QuanLiPhong {
 
     //thêm thông tin đặt phòng
     public void add() {
-        int maDatPhong = nhapMaPhong();
-        int maPhong = nhapMaPhong();
-        int maKhachHang = nhapKhachHang();
+        String maDatPhong = nhapMaPhong();
+        String maPhong = nhapMaPhong();
+        String maKhachHang = nhapKhachHang();
         Date ngayDat = nhapNgayDat();
         Date ngayTra = nhapngayTra();
         int TongTien = nhapTongTien();
@@ -88,7 +88,7 @@ public class QuanLiPhong {
     public void xoaThongTin(int maDatPhong) {
         DatPhong datPhong = null;
         for (int i = 0; i < dPhongs.size(); i++) {
-            if (dPhongs.get(i).getMaDatPhong() == maDatPhong) {
+            if (dPhongs.get(i).getMaDatPhong().equals(maDatPhong)) {
                 datPhong = dPhongs.get(i);
                 break;
             }
@@ -105,7 +105,7 @@ public class QuanLiPhong {
     public void locThongTinTheoMaPhong(int maPhong) {
         DatPhong datPhong = null;
         for (int i = 0; i < dPhongs.size(); i++) {
-            if (dPhongs.get(i).getMaPhong() == maPhong) {
+            if (dPhongs.get(i).getMaPhong().equals(maPhong) ){
                 datPhong = dPhongs.get(i);
                 break;
             }
@@ -128,7 +128,7 @@ public class QuanLiPhong {
     public void locThongTinTheoMaKhachHang(int maKhachHang) {
         DatPhong datPhong = null;
         for (int i = 0; i < dPhongs.size(); i++) {
-            if (dPhongs.get(i).getMaKhachHang() == maKhachHang) {
+            if (dPhongs.get(i).getMaKhachHang() .equals(maKhachHang)) {
                 datPhong = dPhongs.get(i);
                 break;
             }
@@ -167,7 +167,7 @@ public class QuanLiPhong {
         int a = 0;
         System.out.println("sửa lại thông tin");
         for (int i = 0; i < dPhongs.size(); i++) {
-            if (dPhongs.get(i).getMaDatPhong() == maDatPhong) {
+            if (dPhongs.get(i).getMaDatPhong().equals(maDatPhong) ){
                 a = 1;
                 dPhongs.get(i).setNgayDat(nhapNgayDat());
                 dPhongs.get(i).setNgayTra(nhapngayTra());
@@ -185,7 +185,7 @@ public class QuanLiPhong {
         int a = 0;
         System.out.println("sửa lại thông tin");
         for (int i = 0; i < dPhongs.size(); i++) {
-            if (dPhongs.get(i).getMaDatPhong() == maDatPhong) {
+            if (dPhongs.get(i).getMaDatPhong().equals( maDatPhong)) {
                 a = 1;
                 dPhongs.get(i).setNgayTra(nhapngayTra());
             }
