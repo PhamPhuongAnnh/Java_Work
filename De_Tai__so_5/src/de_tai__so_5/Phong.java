@@ -13,20 +13,33 @@ public class Phong {
     
     private String maPhong;
     private int soTang;
-    
+ 
    
-    private int loaiPhong;
+    private int loaiPhong;  
+    public String trangThai;
     private double giaPhong;
 
     public Phong() {
     }
 
-    public Phong(String maPhong, int soTang, int loaiPhong, double giaPhong) {
+    public Phong(String maPhong, int soTang, int loaiPhong, String trangThai, double giaPhong) {
         this.maPhong = maPhong;
         this.soTang = soTang;
         this.loaiPhong = loaiPhong;
+        this.trangThai = trangThai;
         this.giaPhong = giaPhong;
     }
+
+  
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+  
 
     public String getMaPhong() {
         return maPhong;

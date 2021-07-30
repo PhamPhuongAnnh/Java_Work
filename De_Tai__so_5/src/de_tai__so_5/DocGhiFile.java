@@ -80,10 +80,10 @@ public class DocGhiFile {
             if (!f.exists()) {
                 fw = new FileWriter(PATH_FILE_CSV_Phong, true);
                 CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-                String[] header = {"Ma Phong", "So Tang", "Loại Phòng", "Gia tien"};
+                String[] header = {"Ma Phong", "So Tang", "Loại Phòng", "Trang Thai", "Gia tien"};
                 csvWrite.writeNext(header);
                 for (Phong item : list) {
-                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaPhong()), String.valueOf(item.getSoTang()), String.valueOf(item.getLoaiPhong()), String.valueOf(item.getGiaPhong())});
+                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaPhong()), String.valueOf(item.getSoTang()), String.valueOf(item.getLoaiPhong()),String.valueOf(item.getTrangThai()), String.valueOf(item.getGiaPhong())});
 
                 }
             } else {
@@ -145,7 +145,7 @@ public class DocGhiFile {
             String[] line;
             line = csvReader.readNext();
             while ((line = csvReader.readNext()) != null) {
-                Phong phong = new Phong(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Double.parseDouble(line[3]));
+                Phong phong = new Phong(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]),line[3], Double.parseDouble(line[4]));
                 list.add(phong);
 
             }
@@ -177,7 +177,7 @@ public class DocGhiFile {
                 String[] header = {"Ma Dat Phong", "Ma Phong", "Ma Khach Hang", "NgayDat", "NgayTRa", "TongTien"};
                 csvWrite.writeNext(header);
                 for (DatPhong item : list) {
-                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaDatPhong()), String.valueOf(item.getMaPhong()),String.valueOf(item.getMaKhachHang()),df.format(item.getNgayDat()) ,df.format(item.getNgayDat()), String.valueOf(item.getTongTien())});
+                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaDatPhong()), String.valueOf(item.getMaPhong()),String.valueOf(item.getMaKhachHang()),df.format(item.getNgayDat()) ,df.format(item.getNgayTra()), String.valueOf(item.getTongTien())});
 
                 }
             } else {
@@ -207,7 +207,7 @@ public class DocGhiFile {
     }
      public List<DatPhong> docFileDatPhong() throws CsvValidationException, ParseException {
          
-         SimpleDateFormat df =new SimpleDateFormat("dd-MMM-yyyy");
+         SimpleDateFormat df =new SimpleDateFormat("dd-MM-yyyy");
          
         FileReader fr = null;
         List<DatPhong> list = new ArrayList<>();

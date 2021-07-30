@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,11 +41,24 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             } catch (CsvValidationException ex) {
                 Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
 
     }
+    
+    public void resetForm() {
+        if (f.exists()) {
+            try {
+                danhSachKhachHang = dc.docFile();
+                String ma = danhSachKhachHang.get(danhSachKhachHang.size() - 1).getMaKhachHang();
+                id = Integer.parseInt(ma.substring(2)) + 1;
+                hienThi(danhSachKhachHang);
+            } catch (CsvValidationException ex) {
+                Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
+        }
+    }
+    
     public void hienThi(List<khachHang> danhSachKhachHang) {
         tableModel.setRowCount(0);
         for (khachHang item : danhSachKhachHang) {
@@ -57,6 +72,25 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         }
     }
 
+     public int extractNumber(String str) {
+        if (str == null) {
+            return -1;
+        }
+        boolean found = false;
+        for (int i = 0; i < str.length(); i++) {
+            char dt = str.charAt(i);
+            if (dt == '0' || dt == '1' || dt == '2' || dt == '3' || dt == '4' || dt == '5' || dt == '6' || dt == '7' || dt == '8' || dt == '9') {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,6 +115,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         ButunReset2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         ButunReset6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -288,6 +323,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
         ButunReset6.setBackground(new java.awt.Color(204, 204, 204));
         ButunReset6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ButunReset6.setIcon(new javax.swing.ImageIcon("D:\\img\\save.png")); // NOI18N
         ButunReset6.setText("Lưu ");
         ButunReset6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -297,6 +333,14 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         ButunReset6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButunReset6ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Chỉnh Sửa");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
 
@@ -322,23 +366,25 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                             .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                             .addComponent(boxPhuongThuThanhToan, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addGap(156, 156, 156)
                         .addComponent(buttunLuu)
-                        .addGap(56, 56, 56)
-                        .addComponent(ButunReset6)
-                        .addGap(65, 65, 65)
-                        .addComponent(ButunReset, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(105, 105, 105)
+                        .addComponent(ButunReset6)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addGap(112, 112, 112)
+                        .addComponent(ButunReset, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(136, 136, 136)
                         .addComponent(ButunReset1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                        .addGap(142, 142, 142)
                         .addComponent(ButunReset2)
-                        .addGap(569, 569, 569))))
+                        .addGap(127, 127, 127)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addComponent(jSeparator1)
         );
         jPanel1Layout.setVerticalGroup(
@@ -378,7 +424,8 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                     .addComponent(ButunReset1)
                     .addComponent(ButunReset)
                     .addComponent(buttunLuu)
-                    .addComponent(ButunReset6))
+                    .addComponent(ButunReset6)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(190, 190, 190))
         );
 
@@ -466,24 +513,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         danhSachKhachHang.add(kh);
         tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT});
     }//GEN-LAST:event_buttunLuuActionPerformed
-    public int extractNumber(String str) {
-        if (str == null) {
-            return -1;
-        }
-        boolean found = false;
-        for (int i = 0; i < str.length(); i++) {
-            char dt = str.charAt(i);
-            if (dt == '0' || dt == '1' || dt == '2' || dt == '3' || dt == '4' || dt == '5' || dt == '6' || dt == '7' || dt == '8' || dt == '9') {
-                found = true;
-                break;
-            }
-        }
-        if (found == false) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+   
 
     private void txtHoTenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHoTenMouseClicked
 
@@ -510,27 +540,26 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunReset1ActionPerformed
 
     private void ButunReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset2ActionPerformed
-        // chỉnh sửa
-
+ 
     }//GEN-LAST:event_ButunReset2ActionPerformed
 
     private void ButunReset3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset3ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_ButunReset3ActionPerformed
 
     private void ButunReset1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset1MouseClicked
-//        Phương thức tìm kiếm 
-        TimKiemForm.main();
+       //chỉnh sửa lại tìm kiếm form
+        LocKhachHangForm.main();
     }//GEN-LAST:event_ButunReset1MouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
 
     }//GEN-LAST:event_formWindowClosed
-//ghi file
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
     }//GEN-LAST:event_formWindowClosing
-//xử lý ngoại lệ
+//xửa lý ngoại lệ
     private void txtHoTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHoTenFocusLost
 
         if (extractNumber(txtHoTen.getText()) == 0) {
@@ -564,7 +593,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTuoiFocusLost
 
     private void ButunReset6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset6ActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_ButunReset6ActionPerformed
 
     private void ButunReset6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset6MouseClicked
@@ -573,24 +602,16 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunReset6MouseClicked
 
     private void ButunReset2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset2MouseClicked
-        // TODO add your handling code here:
+   
         ChinhSuaForm.main();
         this.dispose();
     }//GEN-LAST:event_ButunReset2MouseClicked
-    public void resetForm() {
-        if (f.exists()) {
-            try {
-                danhSachKhachHang = dc.docFile();
-                String ma = danhSachKhachHang.get(danhSachKhachHang.size() - 1).getMaKhachHang();
-                id = Integer.parseInt(ma.substring(2)) + 1;
-                hienThi(danhSachKhachHang);
-            } catch (CsvValidationException ex) {
-                Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
-        }
-    }
-
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+      Collections.sort(danhSachKhachHang, new TuoiComparator());
+        hienThi(danhSachKhachHang);
+    }//GEN-LAST:event_jButton1MouseClicked
+    
     public static void main() {
         
         try {
@@ -618,6 +639,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     private javax.swing.JButton ButunReset6;
     private javax.swing.JComboBox<String> boxPhuongThuThanhToan;
     private javax.swing.JButton buttunLuu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

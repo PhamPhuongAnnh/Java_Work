@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,11 +46,11 @@ public class DatPhong_Form extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) tblDatPhong.getModel();
-        if (!f.exists()) {
+        if (f.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
-                danhSacgPhong = dc.docFilePhong();
-                danhSachKhaHang = dc.docFile();
+//                danhSacgPhong = dc.docFilePhong();
+//                danhSachKhaHang = dc.docFile();
                 hienThi(danhSacgDatPhong);
                 String ma = danhSacgDatPhong.get(danhSacgDatPhong.size() - 1).getMaDatPhong();
                 id = Integer.parseInt(ma.substring(3)) + 1;
@@ -67,10 +69,12 @@ public class DatPhong_Form extends javax.swing.JFrame {
             String maphong = item.getMaPhong();
             String maKhachHang = item.getMaKhachHang();
             Date ngayDat = item.getNgayDat();
+            String ngayDat1 = df.format(ngayDat);
             Date ngayTra = item.getNgayTra();
+            String ngayTra1 = df.format(ngayTra);
 
             int tongTien = item.getTongTien();
-            tableModel.addRow(new Object[]{maKhachHang, maphong, maKhachHang, ngayDat, ngayTra, tongTien});
+            tableModel.addRow(new Object[]{maDatPhong, maphong, maKhachHang, ngayDat1, ngayTra1, tongTien});
         }
     }
 
@@ -86,7 +90,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         ButunReset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -103,7 +106,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
         ButunReset6 = new javax.swing.JButton();
         txtNgayTra = new com.toedter.calendar.JDateChooser();
         txtNgayDat = new com.toedter.calendar.JDateChooser();
-        ButunReset4 = new javax.swing.JButton();
+        btnChinhSuaPhong = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,14 +118,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Đặt Phòng");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel10.setText("X");
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,17 +125,13 @@ public class DatPhong_Form extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(596, 596, 596)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel8))
+                .addComponent(jLabel8)
                 .addGap(441, 441, 441))
         );
 
@@ -151,6 +142,11 @@ public class DatPhong_Form extends javax.swing.JFrame {
         ButunReset.setBackground(new java.awt.Color(204, 204, 204));
         ButunReset.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ButunReset.setText("Reset");
+        ButunReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButunResetMouseClicked(evt);
+            }
+        });
         ButunReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButunResetActionPerformed(evt);
@@ -158,7 +154,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
         });
 
         tblDatPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tblDatPhong.setForeground(new java.awt.Color(255, 255, 255));
         tblDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -224,17 +219,17 @@ public class DatPhong_Form extends javax.swing.JFrame {
             }
         });
 
-        ButunReset4.setBackground(new java.awt.Color(204, 204, 204));
-        ButunReset4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        ButunReset4.setText("Hiển thị");
-        ButunReset4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnChinhSuaPhong.setBackground(new java.awt.Color(204, 204, 204));
+        btnChinhSuaPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnChinhSuaPhong.setText("chỉnh sửa đặt phòng");
+        btnChinhSuaPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ButunReset4MouseClicked(evt);
+                btnChinhSuaPhongMouseClicked(evt);
             }
         });
-        ButunReset4.addActionListener(new java.awt.event.ActionListener() {
+        btnChinhSuaPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButunReset4ActionPerformed(evt);
+                btnChinhSuaPhongActionPerformed(evt);
             }
         });
 
@@ -243,43 +238,44 @@ public class DatPhong_Form extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(83, 83, 83)
-                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(40, 40, 40)
-                        .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(83, 83, 83)
+                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40)
+                                .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel15))
-                                .addGap(51, 51, 51))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(84, 84, 84)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNgayDat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(399, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(buttunLuu1)
-                .addGap(58, 58, 58)
-                .addComponent(ButunReset6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(ButunReset)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButunReset4)
-                .addGap(562, 562, 562))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel15))
+                                        .addGap(51, 51, 51))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(84, 84, 84)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMaPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNgayDat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(buttunLuu1)
+                        .addGap(58, 58, 58)
+                        .addComponent(ButunReset6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)
+                        .addComponent(ButunReset)
+                        .addGap(161, 161, 161)
+                        .addComponent(btnChinhSuaPhong)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,11 +290,15 @@ public class DatPhong_Form extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,7 +314,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
                     .addComponent(ButunReset)
                     .addComponent(buttunLuu1)
                     .addComponent(ButunReset6)
-                    .addComponent(ButunReset4))
+                    .addComponent(btnChinhSuaPhong))
                 .addContainerGap())
         );
 
@@ -331,7 +331,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -348,22 +348,17 @@ public class DatPhong_Form extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-        // TODO add your handling code here:
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel10MouseClicked
     public void resetForm() {
         if (!f.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
-                danhSacgPhong = dc.docFilePhong();
-                danhSachKhaHang = dc.docFile();
+//                danhSacgPhong = dc.docFilePhong();
+//                danhSachKhaHang = dc.docFile();
                 hienThi(danhSacgDatPhong);
                 String ma = danhSacgDatPhong.get(danhSacgDatPhong.size() - 1).getMaDatPhong();
                 id = Integer.parseInt(ma.substring(3)) + 1;
@@ -378,24 +373,30 @@ public class DatPhong_Form extends javax.swing.JFrame {
         txtMaPhong.setText("");
         txtMaKhachHang.setText("");
         txtTongTien.setText("");
+        Date date = java.util.Calendar.getInstance().getTime();
+        txtNgayDat.setDate(date);
+        txtNgayTra.setDate(date);
         resetForm();
     }//GEN-LAST:event_ButunResetActionPerformed
 
     private void txtMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaPhongActionPerformed
-
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     private void buttunLuu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuu1ActionPerformed
 
         String MaDatPhong = "MDP" + id++;
         String MaPhong = txtMaPhong.getText();
         String maKhachHang = txtMaKhachHang.getText();
         Date NgayDat = txtNgayDat.getDate();
+        String ngayDat = df.format(NgayDat);
         Date NgayTra = txtNgayTra.getDate();
+        String ngayTra = df.format(NgayTra);
+
         int TongTIen = Integer.parseInt(txtTongTien.getText());
         DatPhong datPhong = new DatPhong(MaDatPhong, MaPhong, maKhachHang, NgayDat, NgayTra, TongTIen);
         danhSacgDatPhong.add(datPhong);
-        tableModel.addRow(new Object[]{maKhachHang, MaPhong, maKhachHang, NgayDat, NgayTra, TongTIen});
+        tableModel.addRow(new Object[]{MaDatPhong, MaPhong, maKhachHang, ngayDat, ngayTra, TongTIen});
 
     }//GEN-LAST:event_buttunLuu1ActionPerformed
 
@@ -405,12 +406,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
 
     private void ButunReset6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset6MouseClicked
 
-        if (!f.exists()) {
-            dc.ghiFileDatPhong(danhSacgDatPhong);
-        } else {
-            f.delete();
-            dc.ghiFileDatPhong(danhSacgDatPhong);
-        }
+        f.delete();
+        dc.ghiFileDatPhong(danhSacgDatPhong);
+
     }//GEN-LAST:event_ButunReset6MouseClicked
     public int extractNumber(String str) {
         if (str == null) {
@@ -435,31 +433,17 @@ public class DatPhong_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ButunReset6ActionPerformed
 
-    private void ButunReset4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset4MouseClicked
-        try {
-            List<DatPhong> list = dc.docFileDatPhong();
-            for (DatPhong item : list) {
-                String maDatPhong = item.getMaDatPhong();
-                String maPhong = item.getMaPhong();
-                String maKHachHang = item.getMaKhachHang();
-                Date ngayDat = item.getNgayDat();
-                Date ngayTra = item.getNgayTra();
-                int tongTien = item.getTongTien();
-                tableModel.addRow(new Object[]{maDatPhong, maPhong, maKHachHang, ngayDat, ngayTra, tongTien});
+    private void btnChinhSuaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSuaPhongActionPerformed
+        ChinhSuaDatPhong.main();
+    }//GEN-LAST:event_btnChinhSuaPhongActionPerformed
 
-            }
-        } catch (CsvValidationException ex) {
-            Logger.getLogger(DatPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(DatPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(danhSacgDatPhong.get(0).getMaPhong());
+    private void btnChinhSuaPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaPhongMouseClicked
+//        ChinhSuaDatPhong.main();
+    }//GEN-LAST:event_btnChinhSuaPhongMouseClicked
 
-    }//GEN-LAST:event_ButunReset4MouseClicked
-
-    private void ButunReset4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset4ActionPerformed
+    private void ButunResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunResetMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_ButunReset4ActionPerformed
+    }//GEN-LAST:event_ButunResetMouseClicked
 
     /**
      * @param args the command line arguments
@@ -499,11 +483,10 @@ public class DatPhong_Form extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButunReset;
-    private javax.swing.JButton ButunReset4;
     private javax.swing.JButton ButunReset6;
+    private javax.swing.JButton btnChinhSuaPhong;
     private javax.swing.JButton buttunLuu1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
