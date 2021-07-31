@@ -167,7 +167,7 @@ public class DocGhiFile {
         return list;
     }
  public void ghiFileDatPhong(List<DatPhong> list) {
-     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         FileWriter fw = null;
         try {
             File f = new File(PATH_FILE_CSV_DATPHONG);
@@ -184,7 +184,7 @@ public class DocGhiFile {
                 fw = new FileWriter(PATH_FILE_CSV_DATPHONG, true);
                 CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
                 for (DatPhong item : list) {
-                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaDatPhong()), String.valueOf(item.getMaPhong()),String.valueOf(item.getMaKhachHang()), String.valueOf(item.getNgayTra()), String.valueOf(item.getNgayDat()), String.valueOf(item.getTongTien())});
+                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaDatPhong()), String.valueOf(item.getMaPhong()),String.valueOf(item.getMaKhachHang()), df.format(item.getNgayDat()), df.format(item.getNgayTra()), String.valueOf(item.getTongTien())});
 
                 }
             }
@@ -207,7 +207,7 @@ public class DocGhiFile {
     }
      public List<DatPhong> docFileDatPhong() throws CsvValidationException, ParseException {
          
-         SimpleDateFormat df =new SimpleDateFormat("dd-MM-yyyy");
+         SimpleDateFormat df =new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
          
         FileReader fr = null;
         List<DatPhong> list = new ArrayList<>();
