@@ -257,8 +257,8 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         String maKhachHang = txtMaKH.getText();
         String HotenKhachHang = txtHoTen.getText();
         int tuoi = Integer.parseInt(txtTuoi.getText());
-        int scmnd = Integer.parseInt(txtSoCMND.getText());
-        int sdt = Integer.parseInt(txtSoDT.getText());
+        String scmnd = txtSoCMND.getText();
+        String sdt = txtSoDT.getText();
         String phuongTTT = txtPTTT.getText();
         int check = 0;
         for (khachHang item : danhSachKhachHang) {
@@ -294,8 +294,8 @@ public class ChinhSuaForm extends javax.swing.JFrame {
                     flag = true;
                     txtMaKH.setText(item.getMaKhachHang());
                     txtHoTen.setText(item.getHoTen());
-                    txtSoDT.setText(Integer.toString(item.getSDT()));
-                    txtSoCMND.setText(Integer.toString(item.getCMND()));
+                    txtSoDT.setText(item.getSDT());
+                    txtSoCMND.setText(item.getCMND());
                     txtTuoi.setText(Integer.toString(item.getTuoi()));
                     txtPTTT.setText(item.getPhuongThucThanhToan());
                 }

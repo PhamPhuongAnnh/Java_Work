@@ -167,8 +167,8 @@ public class LocKhachHangForm extends javax.swing.JFrame {
                     flag = true;
                     String maKH = item.getMaKhachHang();
                     String hoTen = item.getHoTen();
-                    int SoCMND = item.getCMND();
-                    int soDT = item.getSDT();
+                    String SoCMND = item.getCMND();
+                    String soDT = item.getSDT();
                     int tuoi = item.getTuoi();
                     String pttt = item.getPhuongThucThanhToan();
                     tableModel.addRow(new Object[]{maKH, hoTen, SoCMND, soDT, tuoi, pttt});

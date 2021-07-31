@@ -31,7 +31,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) tblPhong.getModel();
-        
+
         if (f.exists()) {
             try {
                 danhPhong = dc.docFilePhong();
@@ -65,7 +65,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
             int sucChua = item.getLoaiPhong();
             String trangThai = item.getTrangThai();
             double giaPhong = item.getGiaPhong();
-            tableModel.addRow(new Object[]{maPhong, SoTang, sucChua,trangThai, giaPhong});
+            tableModel.addRow(new Object[]{maPhong, SoTang, sucChua, trangThai, giaPhong});
         }
     }
 
@@ -87,7 +87,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
             return 0;
         }
     }
-     
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -275,6 +275,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         });
 
         SapXep.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        SapXep.setIcon(new javax.swing.ImageIcon("D:\\img\\sort.png")); // NOI18N
         SapXep.setText("Sắp xếp");
         SapXep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,15 +326,15 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
                 .addComponent(ThemPhong)
                 .addGap(122, 122, 122)
                 .addComponent(Luu, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114)
+                .addGap(198, 198, 198)
                 .addComponent(Reset, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139)
+                .addGap(142, 142, 142)
                 .addComponent(Loc)
-                .addGap(163, 163, 163)
+                .addGap(132, 132, 132)
                 .addComponent(ChinhSua)
-                .addGap(176, 176, 176)
-                .addComponent(SapXep, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167))
+                .addGap(108, 108, 108)
+                .addComponent(SapXep)
+                .addGap(156, 156, 156))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,15 +368,13 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(SapXep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ChinhSua))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ThemPhong)
-                        .addComponent(Luu)
-                        .addComponent(Reset)
-                        .addComponent(Loc)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ThemPhong)
+                    .addComponent(Luu)
+                    .addComponent(Reset)
+                    .addComponent(ChinhSua)
+                    .addComponent(SapXep)
+                    .addComponent(Loc))
                 .addGap(31, 31, 31))
         );
 

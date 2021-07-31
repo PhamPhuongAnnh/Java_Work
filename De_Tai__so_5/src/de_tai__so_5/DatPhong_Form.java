@@ -49,8 +49,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
         if (f.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
-//                danhSacgPhong = dc.docFilePhong();
-//                danhSachKhaHang = dc.docFile();
+                danhSacgPhong = dc.docFilePhong();
+                System.out.println(danhSacgPhong);
+                danhSachKhaHang = dc.docFile();
                 hienThi(danhSacgDatPhong);
                 String ma = danhSacgDatPhong.get(danhSacgDatPhong.size() - 1).getMaDatPhong();
                 id = Integer.parseInt(ma.substring(3)) + 1;
@@ -168,6 +169,11 @@ public class DatPhong_Form extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ngày Đặt:");
 
+        txtMaPhong.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMaPhongFocusLost(evt);
+            }
+        });
         txtMaPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaPhongActionPerformed(evt);
@@ -221,7 +227,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
 
         btnChinhSuaPhong.setBackground(new java.awt.Color(204, 204, 204));
         btnChinhSuaPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnChinhSuaPhong.setText("chỉnh sửa đặt phòng");
+        btnChinhSuaPhong.setText("Chỉnh sửa ");
         btnChinhSuaPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnChinhSuaPhongMouseClicked(evt);
@@ -380,7 +386,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunResetActionPerformed
 
     private void txtMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhongActionPerformed
-        // TODO add your handling code here:
+        //xử lý ngoại lệ 
+
+
     }//GEN-LAST:event_txtMaPhongActionPerformed
     DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     private void buttunLuu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuu1ActionPerformed
@@ -444,6 +452,15 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private void ButunResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunResetMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_ButunResetMouseClicked
+
+    private void txtMaPhongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaPhongFocusLost
+        for (Phong item : danhSacgPhong) {
+            if (txtMaPhong.getText() != item.getMaPhong()) {
+                JOptionPane.showMessageDialog(rootPane, "Hay nhập đúng định dạng mã phòng ví dụ: MP10");
+            }
+        }
+
+    }//GEN-LAST:event_txtMaPhongFocusLost
 
     /**
      * @param args the command line arguments

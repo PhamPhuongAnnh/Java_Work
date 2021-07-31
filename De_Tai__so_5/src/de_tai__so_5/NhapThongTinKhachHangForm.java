@@ -64,9 +64,9 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         for (khachHang item : danhSachKhachHang) {
             String maKhachHang = item.getMaKhachHang();
             String hoTen = item.getHoTen();
-            int soDt = item.getSDT();
+            String soDt = item.getSDT();
             int tuoi = item.getTuoi();
-            int cmnd = item.getCMND();
+            String cmnd = item.getCMND();
             String pttt = item.getPhuongThucThanhToan();
             tableModel.addRow(new Object[]{maKhachHang, hoTen, soDt, tuoi, cmnd, pttt});
         }
@@ -419,13 +419,14 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButunReset2)
-                    .addComponent(ButunReset1)
-                    .addComponent(ButunReset)
-                    .addComponent(buttunLuu)
-                    .addComponent(ButunReset6)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ButunReset2)
+                        .addComponent(ButunReset1)
+                        .addComponent(ButunReset)
+                        .addComponent(buttunLuu)
+                        .addComponent(ButunReset6)))
                 .addGap(190, 190, 190))
         );
 
@@ -506,10 +507,10 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         System.out.println(maKhachHang);
         String HotenKhachHang = txtHoTen.getText();
         int tuoi = Integer.parseInt(txtTuoi.getText());
-        int scmnd = Integer.parseInt(txtCMND.getText());
-        int sdt = Integer.parseInt(txtSDT.getText());
+        String scmnd = txtCMND.getText();
+        String sdt = txtSDT.getText();
         String phuongTTT = boxPhuongThuThanhToan.getSelectedItem().toString();
-        khachHang kh = new khachHang(maKhachHang, HotenKhachHang, tuoi, scmnd, sdt, phuongTTT);
+        khachHang kh = new khachHang(maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT);
         danhSachKhachHang.add(kh);
         tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT});
     }//GEN-LAST:event_buttunLuuActionPerformed

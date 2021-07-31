@@ -12,19 +12,21 @@ package de_tai__so_5;
 public class khachHang {
     private String maKhachHang;
     private String hoTen;
+    private String SDT;
     private int Tuoi;
-    private int CMND;
-    private int SDT;
+    private String CMND;
     private String phuongThucThanhToan;
 
-    public khachHang(String maKhachHang, String hoTen, int Tuoi, int CMND, int SDT, String phuongThucThanhToan) {
+    public khachHang(String maKhachHang, String hoTen, String SDT, int Tuoi, String CMND, String phuongThucThanhToan) {
         this.maKhachHang = maKhachHang;
         this.hoTen = hoTen;
+        this.SDT = SDT;
         this.Tuoi = Tuoi;
         this.CMND = CMND;
-        this.SDT = SDT;
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
+
+   
 
     public khachHang() {
     }
@@ -56,19 +58,19 @@ public class khachHang {
         this.Tuoi = Tuoi;
     }
 
-    public int getCMND() {
+    public String getCMND() {
         return CMND;
     }
 
-    public void setCMND(int CMND) {
+    public void setCMND(String CMND) {
         this.CMND = CMND;
     }
 
-    public int getSDT() {
+    public String getSDT() {
         return SDT;
     }
 
-    public void setSDT(int SDT) {
+    public void setSDT(String SDT) {
         this.SDT = SDT;
     }
 

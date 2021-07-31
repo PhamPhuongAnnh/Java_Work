@@ -325,6 +325,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtMaPhong">
               <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtMaPhongFocusLost"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaPhongActionPerformed"/>
               </Events>
             </Component>
@@ -420,7 +421,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="ch&#x1ec9;nh s&#x1eed;a &#x111;&#x1eb7;t ph&#xf2;ng"/>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ec9;nh s&#x1eed;a "/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnChinhSuaPhongMouseClicked"/>

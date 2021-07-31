@@ -120,7 +120,7 @@ public class DocGhiFile {
             String[] line;
             line = csvReader.readNext();
             while ((line = csvReader.readNext()) != null) {
-                khachHang kh = new khachHang(line[0], line[1], Integer.parseInt(line[2]), Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[5]);
+                khachHang kh = new khachHang(line[0], line[1], line[2], Integer.parseInt(line[3]), line[4], line[5]);
                 list.add(kh);
             }
         } catch (IOException ex) {
