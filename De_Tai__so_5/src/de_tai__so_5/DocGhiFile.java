@@ -44,15 +44,14 @@ public class DocGhiFile {
                 String[] header = {"Ma KH", "Ho Ten", "So CMND", "SĐT", "Tuoi", "PTTT"};
                 csvWrite.writeNext(header);
                 for (khachHang item : list) {
-                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), String.valueOf(item.getCMND()), String.valueOf(item.getSDT()), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
+                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), item.getCMND(), item.getSDT(), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
 
                 }
             } else {
                 fw = new FileWriter(PATH_FILE_CSV, true);
                 CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
                 for (khachHang item : list) {
-                    csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), String.valueOf(item.getCMND()), String.valueOf(item.getSDT()), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
-
+                                        csvWrite.writeNext(new String[]{String.valueOf(item.getMaKhachHang()), item.getHoTen(), item.getCMND(), item.getSDT(), String.valueOf(item.getTuoi()), item.getPhuongThucThanhToan()});
                 }
             }
 
@@ -120,7 +119,7 @@ public class DocGhiFile {
             String[] line;
             line = csvReader.readNext();
             while ((line = csvReader.readNext()) != null) {
-                khachHang kh = new khachHang(line[0], line[1], line[2], Integer.parseInt(line[3]), line[4], line[5]);
+                khachHang kh = new khachHang(line[0], line[1], line[2], line[3], Integer.parseInt(line[4]), line[5]);
                 list.add(kh);
             }
         } catch (IOException ex) {

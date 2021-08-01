@@ -181,19 +181,12 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
             new String [] {
                 "Mã Phòng", "Số Tầng ", "Loại Phòng", "Trạng thái", "Giá Phòng"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblPhong);
         if (tblPhong.getColumnModel().getColumnCount() > 0) {
-            tblPhong.getColumnModel().getColumn(0).setResizable(false);
-            tblPhong.getColumnModel().getColumn(1).setResizable(false);
+            tblPhong.getColumnModel().getColumn(0).setMaxWidth(130);
+            tblPhong.getColumnModel().getColumn(1).setMinWidth(0);
+            tblPhong.getColumnModel().getColumn(1).setMaxWidth(100);
             tblPhong.getColumnModel().getColumn(2).setResizable(false);
         }
 
@@ -305,11 +298,11 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtSoTang, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtGiaPhong, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(loaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtGiaPhong)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(loaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)))

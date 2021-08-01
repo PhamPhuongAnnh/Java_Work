@@ -11,21 +11,22 @@ package de_tai__so_5;
  */
 public class khachHang {
     private String maKhachHang;
-    private String hoTen;
+    private String hoTen;   
+    private String CMND;
     private String SDT;
     private int Tuoi;
-    private String CMND;
     private String phuongThucThanhToan;
 
-    public khachHang(String maKhachHang, String hoTen, String SDT, int Tuoi, String CMND, String phuongThucThanhToan) {
+    public khachHang(String maKhachHang, String hoTen, String CMND, String SDT, int Tuoi, String phuongThucThanhToan) {
         this.maKhachHang = maKhachHang;
         this.hoTen = hoTen;
+        this.CMND = CMND;
         this.SDT = SDT;
         this.Tuoi = Tuoi;
-        this.CMND = CMND;
         this.phuongThucThanhToan = phuongThucThanhToan;
     }
 
+ 
    
 
     public khachHang() {

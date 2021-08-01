@@ -28,26 +28,32 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private static final String curentDir = System.getProperty("user.dir");
     private static final String separator = File.separator;
     private static final String PATH_FILE_CSV_DATPHONG = curentDir + separator + "data" + separator + "DatPhong.csv";
+    private static final String PATH_FILE_CSV_PHONG = curentDir + separator + "data" + separator + "Phong.csv";
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     DocGhiFile dc = new DocGhiFile();
     List<DatPhong> danhSacgDatPhong = new ArrayList<>();
     List<khachHang> danhSachKhaHang = new ArrayList<>();
     List<Phong> danhSacgPhong = new ArrayList<>();
 
     File f = new File(PATH_FILE_CSV_DATPHONG);
+    File fP = new File(PATH_FILE_CSV_PHONG);
 
     public DatPhong_Form() {
         initComponents();
         this.setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) tblDatPhong.getModel();
-
+        try {
+            danhSacgPhong = dc.docFilePhong();
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(DatPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (f.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
-//                danhSacgPhong = dc.docFilePhong();
 //                System.out.println(danhSacgPhong);
 //                danhSachKhaHang = dc.docFile();
                 hienThi(danhSacgDatPhong);
- 
+
                 String ma = danhSacgDatPhong.get(danhSacgDatPhong.size() - 1).getMaDatPhong();
                 id = Integer.parseInt(ma.substring(3)) + 1;
             } catch (CsvValidationException ex) {
@@ -74,6 +80,16 @@ public class DatPhong_Form extends javax.swing.JFrame {
         }
     }
 
+    public void chuyenTrangThai(List<Phong> DanhSachDatPhong) {
+        for (Phong item : DanhSachDatPhong) {
+            if (item.getMaPhong().equals(txtMaPhong.getText())) {
+                item.setTrangThai("Da Dat");
+            }
+        }
+        fP.delete();
+        dc.ghiFilePhong(danhSacgPhong);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -98,8 +114,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
         txtNgayTra = new com.toedter.calendar.JDateChooser();
         txtNgayDat = new com.toedter.calendar.JDateChooser();
         btnChinhSuaPhong = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -233,6 +250,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("Thanh Toán");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -276,7 +296,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
                         .addGap(98, 98, 98)
                         .addComponent(ButunReset)
                         .addGap(98, 98, 98)
-                        .addComponent(btnChinhSuaPhong)))
+                        .addComponent(btnChinhSuaPhong)
+                        .addGap(203, 203, 203)
+                        .addComponent(jButton1)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -319,7 +341,8 @@ public class DatPhong_Form extends javax.swing.JFrame {
                     .addComponent(ButunReset)
                     .addComponent(buttunLuu1)
                     .addComponent(ButunReset6)
-                    .addComponent(btnChinhSuaPhong))
+                    .addComponent(btnChinhSuaPhong)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -389,11 +412,13 @@ public class DatPhong_Form extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_txtMaPhongActionPerformed
-    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
     private void buttunLuu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuu1ActionPerformed
 
         String MaDatPhong = "MDP" + id++;
+
         String MaPhong = txtMaPhong.getText();
+        chuyenTrangThai(danhSacgPhong);
         String maKhachHang = txtMaKhachHang.getText();
         Date NgayDat = txtNgayDat.getDate();
         String ngayDat = df.format(NgayDat);
@@ -434,7 +459,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
     }
 
     private void ButunReset6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset6ActionPerformed
-       
+
     }//GEN-LAST:event_ButunReset6ActionPerformed
 
     private void btnChinhSuaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinhSuaPhongActionPerformed
@@ -446,15 +471,15 @@ public class DatPhong_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChinhSuaPhongMouseClicked
 
     private void ButunResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunResetMouseClicked
-      
+
     }//GEN-LAST:event_ButunResetMouseClicked
 
     private void txtMaPhongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaPhongFocusLost
-        for (Phong item : danhSacgPhong) {
-            if (txtMaPhong.getText() != item.getMaPhong()) {
-                JOptionPane.showMessageDialog(rootPane, "Hay nhập đúng định dạng mã phòng ví dụ: MP10");
-            }
-        }
+//        for (Phong item : danhSacgPhong) {
+//            if (txtMaPhong.getText() != item.getMaPhong()) {
+//                JOptionPane.showMessageDialog(rootPane, "Hay nhập đúng định dạng mã phòng ví dụ: MP10");
+//            }
+//        }
 
     }//GEN-LAST:event_txtMaPhongFocusLost
 
@@ -470,6 +495,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private javax.swing.JButton ButunReset6;
     private javax.swing.JButton btnChinhSuaPhong;
     private javax.swing.JButton buttunLuu1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;

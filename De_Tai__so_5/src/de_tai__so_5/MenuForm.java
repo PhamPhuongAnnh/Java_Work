@@ -256,7 +256,6 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jLabelMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinMouseClicked
-
         this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_jLabelMinMouseClicked
 
@@ -273,10 +272,10 @@ public class MenuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPhongMouseClicked
 
     private void txtDatPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDatPhongMouseClicked
-//        DatPhong_Form datPhong = new DatPhong_Form();
-//        datPhong.setVisible(true);
-//        datPhong.pack();
-//        datPhong.setLocationRelativeTo(null);
+        DatPhong_Form datPhong = new DatPhong_Form();
+        datPhong.setVisible(true);
+        datPhong.pack();
+        datPhong.setLocationRelativeTo(null);
     }//GEN-LAST:event_txtDatPhongMouseClicked
 
     private void txtKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtKhachHangMouseClicked

@@ -68,7 +68,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             int tuoi = item.getTuoi();
             String cmnd = item.getCMND();
             String pttt = item.getPhuongThucThanhToan();
-            tableModel.addRow(new Object[]{maKhachHang, hoTen, soDt, tuoi, cmnd, pttt});
+            tableModel.addRow(new Object[]{maKhachHang, hoTen, cmnd,soDt, tuoi , pttt});
         }
     }
 
@@ -258,9 +258,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             }
         });
 
-        tblKhachHang.setBackground(new java.awt.Color(0, 0, 0));
         tblKhachHang.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -286,9 +284,13 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblKhachHang);
         if (tblKhachHang.getColumnModel().getColumnCount() > 0) {
-            tblKhachHang.getColumnModel().getColumn(2).setResizable(false);
+            tblKhachHang.getColumnModel().getColumn(0).setMaxWidth(80);
+            tblKhachHang.getColumnModel().getColumn(1).setMinWidth(200);
+            tblKhachHang.getColumnModel().getColumn(1).setMaxWidth(500);
+            tblKhachHang.getColumnModel().getColumn(2).setMinWidth(20);
             tblKhachHang.getColumnModel().getColumn(3).setResizable(false);
-            tblKhachHang.getColumnModel().getColumn(5).setMaxWidth(70);
+            tblKhachHang.getColumnModel().getColumn(5).setMinWidth(300);
+            tblKhachHang.getColumnModel().getColumn(5).setMaxWidth(500);
         }
 
         ButunReset1.setBackground(new java.awt.Color(204, 204, 204));
@@ -370,11 +372,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                         .addComponent(buttunLuu)
                         .addGap(105, 105, 105)
                         .addComponent(ButunReset6)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(ButunReset, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,7 +382,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                         .addComponent(ButunReset2)
                         .addGap(127, 127, 127)
                         .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1089, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addComponent(jSeparator1)
         );
         jPanel1Layout.setVerticalGroup(
@@ -441,7 +443,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(606, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(627, 627, 627))
         );
@@ -510,7 +512,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         String scmnd = txtCMND.getText();
         String sdt = txtSDT.getText();
         String phuongTTT = boxPhuongThuThanhToan.getSelectedItem().toString();
-        khachHang kh = new khachHang(maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT);
+        khachHang kh = new khachHang(maKhachHang, HotenKhachHang, scmnd, sdt, tuoi, phuongTTT);
         danhSachKhachHang.add(kh);
         tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT});
     }//GEN-LAST:event_buttunLuuActionPerformed

@@ -2,6 +2,9 @@ package de_tai__so_5;
 
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,13 +18,24 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private static final String curentDir = System.getProperty("user.dir");
     private static final String separator = File.separator;
     private static final String PATH_FILE_CSV_Phong = curentDir + separator + "data" + separator + "Phong.csv";
+    private static final String PATH_FILE_CSV_DATPHONG = curentDir + separator + "data" + separator + "DatPhong.csv";
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     DocGhiFile dc = new DocGhiFile();
     List<Phong> danhPhong = new ArrayList<>();
     File f = new File(PATH_FILE_CSV_Phong);
+    File fDP = new File(PATH_FILE_CSV_DATPHONG);
+    List<DatPhong> danhSachDatPhong = new ArrayList<>();
 
     public LocThongTinPhong() {
         initComponents();
         tableModel = (DefaultTableModel) jTable1.getModel();
+        try {
+            danhSachDatPhong = dc.docFileDatPhong();
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(LocThongTinPhong.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(LocThongTinPhong.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +43,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -43,6 +58,9 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         TimTrangThai = new javax.swing.JComboBox<>();
         HTSoTang = new javax.swing.JButton();
         HTtrangThai = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtNgayTra = new com.toedter.calendar.JDateChooser();
+        HTNgayTra = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -55,7 +73,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(248, 148, 6));
 
@@ -162,6 +180,27 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Nhập ngày trả:");
+
+        txtNgayTra.setDateFormatString("dd-MM-yyyy HH:mm:ss");
+
+        HTNgayTra.setBackground(new java.awt.Color(204, 204, 204));
+        HTNgayTra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        HTNgayTra.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
+        HTNgayTra.setText("Hiển thị");
+        HTNgayTra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HTNgayTraMouseClicked(evt);
+            }
+        });
+        HTNgayTra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HTNgayTraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -170,6 +209,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2))
@@ -177,15 +217,14 @@ public class LocThongTinPhong extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(timSoTang)
                     .addComponent(TimTrangThai, 0, 261, Short.MAX_VALUE)
-                    .addComponent(txtTimMA))
+                    .addComponent(txtTimMA)
+                    .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(91, 91, 91)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButunReset4)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(HTtrangThai)
-                            .addComponent(HTSoTang))))
+                    .addComponent(HTSoTang)
+                    .addComponent(HTtrangThai)
+                    .addComponent(HTNgayTra))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -199,15 +238,23 @@ public class LocThongTinPhong extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(timSoTang, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(HTSoTang)))
+                    .addComponent(HTSoTang)
+                    .addComponent(timSoTang, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TimTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(HTtrangThai))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(HTNgayTra)
+                            .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -243,7 +290,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             List<Phong> list = dc.docFilePhong();
             boolean flag = false;
             tableModel.setRowCount(0);
-            
+
             for (Phong item : list) {
                 if (item.getMaPhong().equals(txtTimMA.getText())) {
                     flag = true;
@@ -269,7 +316,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunReset4ActionPerformed
 
     private void timSoTangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timSoTangActionPerformed
-       
+
     }//GEN-LAST:event_timSoTangActionPerformed
 
     private void HTSoTangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HTSoTangMouseClicked
@@ -278,7 +325,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             List<Phong> list = dc.docFilePhong();
             boolean flag = false;
             tableModel.setRowCount(0);
-         
+
             for (Phong item : list) {
                 if (item.getSoTang() == Integer.parseInt(timSoTang.getText())) {
                     flag = true;
@@ -301,11 +348,11 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     }//GEN-LAST:event_HTSoTangMouseClicked
 
     private void HTSoTangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HTSoTangActionPerformed
-       
+
     }//GEN-LAST:event_HTSoTangActionPerformed
 
     private void HTtrangThaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HTtrangThaiMouseClicked
-      try {
+        try {
 
             List<Phong> list = dc.docFilePhong();
             boolean flag = false;
@@ -334,6 +381,44 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HTtrangThaiActionPerformed
 
+    private void HTNgayTraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HTNgayTraMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HTNgayTraMouseClicked
+
+    private void HTNgayTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HTNgayTraActionPerformed
+        try {
+
+            List<Phong> list = dc.docFilePhong();
+
+            boolean flag = false;
+            tableModel.setRowCount(0);
+            
+            for (DatPhong item : danhSachDatPhong){
+                if (df.format(item.getNgayTra()).equals(df.format(txtNgayTra.getDate()))) {
+                    flag = true;
+                    for (Phong itemPhong : list) {
+                        if (item.getMaPhong().equals(itemPhong.getMaPhong())) {
+                            String maPhong = itemPhong.getMaPhong();
+                            int soTang = itemPhong.getSoTang();
+                            int loai = itemPhong.getLoaiPhong();
+                            String trangThai = itemPhong.getTrangThai();
+                            double gia = itemPhong.getGiaPhong();
+                            tableModel.addRow(new Object[]{maPhong, soTang, loai, trangThai, gia});
+                        }
+                    }
+
+                }
+            }
+
+            if (flag == false) {
+                JOptionPane.showMessageDialog(rootPane, "Không có phòng thuộc trạng thái trên");
+            }
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_HTNgayTraActionPerformed
+
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -344,6 +429,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButunReset4;
+    private javax.swing.JButton HTNgayTra;
     private javax.swing.JButton HTSoTang;
     private javax.swing.JButton HTtrangThai;
     private javax.swing.JComboBox<String> TimTrangThai;
@@ -351,12 +437,15 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField timSoTang;
+    private com.toedter.calendar.JDateChooser txtNgayTra;
     private javax.swing.JTextField txtTimMA;
     // End of variables declaration//GEN-END:variables
 }

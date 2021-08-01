@@ -276,6 +276,10 @@ public class ChinhSuaForm extends javax.swing.JFrame {
             f.delete();
             dc.ghiFile(danhSachKhachHang);
             JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
+            kh.dispose();
+            kh = new NhapThongTinKhachHangForm();
+            kh.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy khách hàng cần sử");
         }
@@ -328,10 +332,12 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         if (check == 1) {
             f.delete();
             dc.ghiFile(danhSachKhachHang);
-            JOptionPane.showMessageDialog(rootPane, "Xóa thành công!\n Bạn hãy reset lại form thông tin khách hàng để dữ liệu có thể cập  nhập nhé");
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công!");
             kh.dispose();
             kh = new NhapThongTinKhachHangForm();
             kh.setVisible(true);
+                        this.dispose();
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy khách hàng cần xóa");
         }
