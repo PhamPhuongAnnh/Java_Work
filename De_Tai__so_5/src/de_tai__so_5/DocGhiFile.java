@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de_tai__so_5;
 
 import com.opencsv.CSVReader;
@@ -218,7 +213,7 @@ public class DocGhiFile {
             while ((line = csvReader.readNext()) != null) {
                 Date ngayDat = df.parse(line[3]);
                 Date ngayTra = df.parse(line[4]);
-                DatPhong datPhong = new DatPhong(line[0], line[1], line[2],ngayDat,ngayTra,Integer.parseInt(line[5]));
+                DatPhong datPhong = new DatPhong(line[0], line[1], line[2],ngayDat,ngayTra,Double.parseDouble(line[5]));
                 list.add(datPhong);
 
             }
@@ -241,4 +236,3 @@ public class DocGhiFile {
     }
      
 }
-

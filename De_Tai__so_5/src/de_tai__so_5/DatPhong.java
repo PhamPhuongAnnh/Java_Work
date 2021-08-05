@@ -20,9 +20,9 @@ class DatPhong {
     private String maKhachHang;
     private Date ngayDat;
     private Date ngayTra;
-    private int tongTien;
+    private double tongTien;
 
-    public DatPhong(String maDatPhong, String maPhong, String maKhachHang, Date ngayDat, Date ngayTra, int tongTien) {
+    public DatPhong(String maDatPhong, String maPhong, String maKhachHang, Date ngayDat, Date ngayTra, double tongTien) {
         this.maDatPhong = maDatPhong;
         this.maPhong = maPhong;
         this.maKhachHang = maKhachHang;
@@ -30,6 +30,8 @@ class DatPhong {
         this.ngayTra = ngayTra;
         this.tongTien = tongTien;
     }
+    
+    
 
     public DatPhong() {
     }
@@ -74,13 +76,14 @@ class DatPhong {
         this.ngayTra = ngayTra;
     }
 
-    public int getTongTien() {
+    public double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(int tongTien) {
+    public void setTongTien(double tongTien) {
         this.tongTien = tongTien;
     }
+
 
    
     

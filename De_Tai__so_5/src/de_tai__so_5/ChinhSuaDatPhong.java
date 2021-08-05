@@ -17,9 +17,12 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
     private static final String curentDir = System.getProperty("user.dir");
     private static final String separator = File.separator;
     private static final String PATH_FILE_CSV_DATPHONG = curentDir + separator + "data" + separator + "DatPhong.csv";
+    private static final String PATH_FILE_CSV_PHONG = curentDir + separator + "data" + separator + "Phong.csv";
     DocGhiFile dc = new DocGhiFile();
     DatPhong_Form dp;
     List<DatPhong> danhSachDatPhong = new ArrayList<>();
+    List<Phong> danhSacgPhong = new ArrayList<>();
+
     File f = new File(PATH_FILE_CSV_DATPHONG);
 
     public ChinhSuaDatPhong() {
@@ -28,6 +31,11 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         this.setTitle("Chinh sưa thong tin");
         dp = new DatPhong_Form();
         dp.setVisible(true);
+        try {
+            danhSacgPhong = dc.docFilePhong();
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(DatPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (f.exists()) {
             try {
                 danhSachDatPhong = dc.docFileDatPhong();
@@ -39,7 +47,35 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         }
     }
 
-   
+    public double tongTien(double thoiGian, double giaPhong) {
+        double tongTien = 0;
+        if (thoiGian < 24) {
+            if (thoiGian > 0 && thoiGian <= 2) {
+                tongTien = giaPhong * 15 / 100;
+            } else if (thoiGian > 2 && thoiGian <= 5) {
+                tongTien = giaPhong * 25 / 100;
+            } else if (thoiGian > 5) {
+                tongTien = thoiGian * 10 / 100;
+            }
+        } else if (thoiGian > 24) {
+            int a = (int) (thoiGian / 24);
+            double b = thoiGian - (double) 24 * a;
+            System.out.println(b);
+            System.out.println(a);
+            if (b > 0 && b <= 2) {
+                tongTien = giaPhong * 15 / 100 + giaPhong * a;
+            } else if (b > 2 && b <= 5) {
+                tongTien = giaPhong * 25 / 100 + giaPhong * a;
+            } else if (b > 5) {
+                tongTien = giaPhong * 10 / 100 * b + giaPhong * a;
+            } else if (b == 0) {
+                tongTien = giaPhong * a;
+            }
+        }
+
+        return tongTien;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -50,7 +86,6 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtMaPhong = new javax.swing.JTextField();
         btnChinhSua = new javax.swing.JButton();
         btnBoQua = new javax.swing.JButton();
@@ -60,7 +95,6 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         txtNgayTra = new com.toedter.calendar.JDateChooser();
         txtNgayDat = new com.toedter.calendar.JDateChooser();
-        txtTongtien = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -85,10 +119,6 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Ngày trả:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Tổng Tiền:");
 
         btnChinhSua.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnChinhSua.setText("Chỉnh sửa");
@@ -158,19 +188,18 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
                                 .addGap(81, 81, 81)
                                 .addComponent(btnBoQua))
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel6))
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtMaKH)
                                     .addComponent(txtMaPhong)
-                                    .addComponent(txtNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                                    .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -201,14 +230,7 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(txtTongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChinhSua)
                     .addComponent(btnXoa)
@@ -266,7 +288,7 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         String maDatPhong = TxtMaDatPhong.getText();
         String maPHong = txtMaPhong.getText();
         String maKhachHang = txtMaKH.getText();
-        int tongTien = Integer.parseInt(txtTongtien.getText());
+        
         Date ngayDat;
         Date ngayTra;
 
@@ -278,7 +300,22 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
                 item.setMaKhachHang(maKhachHang);
                 item.setNgayDat(ngayDat);
                 item.setNgayTra(ngayTra);
-                item.setTongTien(tongTien);
+                long a = item.getNgayTra().getTime() - item.getNgayDat().getTime();
+                double phut = a / (60 * 1000) % 60;
+                double gio = a / (60 * 60 * 1000);
+                double thoiGian = phut / 60 + gio;
+                System.out.println(thoiGian);
+                
+                double giaPhong = 0;
+                for (Phong item1 : danhSacgPhong) {
+                    if (item1.getMaPhong().equals(item.getMaPhong())) {
+                        giaPhong = item1.getGiaPhong();
+                    }
+                }
+                System.out.println(giaPhong);
+                double TongTIen = tongTien(thoiGian, giaPhong);
+                item.setTongTien(TongTIen);
+                System.out.println(TongTIen);
                 check = 1;
             }
 
@@ -312,8 +349,6 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
                     txtMaPhong.setText(item.getMaPhong());
                     txtNgayDat.setDate(item.getNgayDat());
                     txtNgayTra.setDate(item.getNgayDat());
-                    txtTongtien.setText(Integer.toString(item.getTongTien()));
-
                 }
 
             }
@@ -353,10 +388,10 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-       
+
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    public static void main() {  
+    public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ChinhSuaDatPhong().setVisible(true);
@@ -375,7 +410,6 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -383,6 +417,5 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaPhong;
     private com.toedter.calendar.JDateChooser txtNgayDat;
     private com.toedter.calendar.JDateChooser txtNgayTra;
-    private javax.swing.JTextField txtTongtien;
     // End of variables declaration//GEN-END:variables
 }

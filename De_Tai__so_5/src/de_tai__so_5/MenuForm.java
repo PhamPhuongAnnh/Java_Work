@@ -19,7 +19,6 @@ public class MenuForm extends javax.swing.JFrame {
         jLabelClose = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabelMin = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         Home = new javax.swing.JPanel();
         txtHome = new javax.swing.JLabel();
@@ -31,6 +30,8 @@ public class MenuForm extends javax.swing.JFrame {
         txtDatPhong = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        DatPhong1 = new javax.swing.JPanel();
+        txtThuNhap = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -67,8 +68,6 @@ public class MenuForm extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("D:\\img\\Screenshot 2021-07-22 200627.png")); // NOI18N
-
         javax.swing.GroupLayout jPanelHomeLayout = new javax.swing.GroupLayout(jPanelHome);
         jPanelHome.setLayout(jPanelHomeLayout);
         jPanelHomeLayout.setHorizontalGroup(
@@ -85,12 +84,11 @@ public class MenuForm extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHomeLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(302, 302, 302))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel7)
-                                .addGroup(jPanelHomeLayout.createSequentialGroup()
-                                    .addComponent(jLabelMin)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabelClose)))))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHomeLayout.createSequentialGroup()
+                                .addComponent(jLabelMin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelClose)
+                                .addGap(3, 3, 3))))))
             .addGroup(jPanelHomeLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel2)
@@ -108,8 +106,7 @@ public class MenuForm extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(248, 148, 6));
@@ -189,16 +186,40 @@ public class MenuForm extends javax.swing.JFrame {
         DatPhong.setLayout(DatPhongLayout);
         DatPhongLayout.setHorizontalGroup(
             DatPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtDatPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(DatPhongLayout.createSequentialGroup()
+                .addComponent(txtDatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         DatPhongLayout.setVerticalGroup(
             DatPhongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtDatPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+            .addComponent(txtDatPhong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("STLiti", 3, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MENU");
+
+        txtThuNhap.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtThuNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtThuNhap.setText("Thu Nhập");
+        txtThuNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtThuNhapMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout DatPhong1Layout = new javax.swing.GroupLayout(DatPhong1);
+        DatPhong1.setLayout(DatPhong1Layout);
+        DatPhong1Layout.setHorizontalGroup(
+            DatPhong1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DatPhong1Layout.createSequentialGroup()
+                .addComponent(txtThuNhap, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        DatPhong1Layout.setVerticalGroup(
+            DatPhong1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txtThuNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -207,10 +228,12 @@ public class MenuForm extends javax.swing.JFrame {
             .addComponent(Home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Phong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(KhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(DatPhong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator1)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DatPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -228,7 +251,9 @@ public class MenuForm extends javax.swing.JFrame {
                 .addComponent(KhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(DatPhong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(DatPhong1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,6 +309,13 @@ public class MenuForm extends javax.swing.JFrame {
         khachHang.pack();
         khachHang.setLocationRelativeTo(null);
     }//GEN-LAST:event_txtKhachHangMouseClicked
+
+    private void txtThuNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtThuNhapMouseClicked
+      ThuNhapForm thuNhap = new ThuNhapForm();
+        thuNhap.setVisible(true);
+        thuNhap.pack();
+        thuNhap.setLocationRelativeTo(null);
+    }//GEN-LAST:event_txtThuNhapMouseClicked
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -294,6 +326,7 @@ public class MenuForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DatPhong;
+    private javax.swing.JPanel DatPhong1;
     private javax.swing.JPanel Home;
     private javax.swing.JPanel KhachHang;
     private javax.swing.JPanel Phong;
@@ -301,7 +334,6 @@ public class MenuForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelMin;
     private javax.swing.JPanel jPanel3;
@@ -311,5 +343,6 @@ public class MenuForm extends javax.swing.JFrame {
     private javax.swing.JLabel txtHome;
     private javax.swing.JLabel txtKhachHang;
     private javax.swing.JLabel txtPhong;
+    private javax.swing.JLabel txtThuNhap;
     // End of variables declaration//GEN-END:variables
 }

@@ -75,7 +75,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
             Date ngayTra = item.getNgayTra();
             String ngayTra1 = df.format(ngayTra);
 
-            int tongTien = item.getTongTien();
+           double tongTien = item.getTongTien();
             tableModel.addRow(new Object[]{maDatPhong, maphong, maKhachHang, ngayDat1, ngayTra1, tongTien});
         }
     }
@@ -105,8 +105,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
         txtMaPhong = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        txtTongTien = new javax.swing.JTextField();
         buttunLuu1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtMaKhachHang = new javax.swing.JTextField();
@@ -195,10 +193,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Ngày Trả:");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Tổng Tiền:");
-
         buttunLuu1.setBackground(new java.awt.Color(204, 204, 204));
         buttunLuu1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         buttunLuu1.setText("Đặt Phòng");
@@ -263,10 +257,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addGap(83, 83, 83)
-                                .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(40, 40, 40)
                                 .addComponent(txtMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -324,15 +314,9 @@ public class DatPhong_Form extends javax.swing.JFrame {
                                 .addComponent(txtNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(34, 34, 34))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel15)
+                            .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap(15, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -400,7 +384,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private void ButunResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunResetActionPerformed
         txtMaPhong.setText("");
         txtMaKhachHang.setText("");
-        txtTongTien.setText("");
+
         Date date = java.util.Calendar.getInstance().getTime();
         txtNgayDat.setDate(date);
         txtNgayTra.setDate(date);
@@ -409,10 +393,35 @@ public class DatPhong_Form extends javax.swing.JFrame {
 
     private void txtMaPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaPhongActionPerformed
         //xử lý ngoại lệ 
-
-
     }//GEN-LAST:event_txtMaPhongActionPerformed
 
+    public double tongTien(double thoiGian,double giaPhong) {
+        double tongTien = 0;
+        if (thoiGian < 24) {
+            if (thoiGian > 0 && thoiGian <= 2) {
+                tongTien = giaPhong*15/100;
+            } else if (thoiGian > 2 && thoiGian <= 5) {
+                tongTien = giaPhong*25/100;
+            }else if(thoiGian>5){
+                tongTien=giaPhong*thoiGian*10/100;
+            }
+        }else if(thoiGian>=24){
+            int a= (int)(thoiGian/24);
+            double b = thoiGian- (double)24*a;
+            System.out.println(a);
+             if (b > 0 && b<= 2) {
+                tongTien = giaPhong*15/100+giaPhong*a;
+            } else if (b> 2 && b <= 5) {
+                tongTien = giaPhong*25/100+giaPhong*a;
+            }else if(b>5){
+                tongTien=giaPhong*10/100*b+giaPhong*a;
+            }else if(b==0){
+                tongTien=giaPhong*a;
+            }
+        }
+            
+       return tongTien;
+    }
     private void buttunLuu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuu1ActionPerformed
 
         String MaDatPhong = "MDP" + id++;
@@ -424,7 +433,23 @@ public class DatPhong_Form extends javax.swing.JFrame {
         String ngayDat = df.format(NgayDat);
         Date NgayTra = txtNgayTra.getDate();
         String ngayTra = df.format(NgayTra);
-        int TongTIen = Integer.parseInt(txtTongTien.getText());
+        //////////lam tien
+        long a = NgayTra.getTime() - NgayDat.getTime();
+        double phut =  a / (60 * 1000) %60;
+        double gio = a /(60*60*1000);
+        double thoiGian = phut /60 +gio;
+        System.out.println(thoiGian);
+        double giaPhong=0;
+        for (Phong item : danhSacgPhong) {
+            if (item.getMaPhong().equals(txtMaPhong.getText())) {
+                 giaPhong= item.getGiaPhong();
+            }
+        }
+        System.out.println(giaPhong);
+        double TongTIen= tongTien(thoiGian, giaPhong);
+        ////////////////////////
+        System.out.println(TongTIen);
+
         DatPhong datPhong = new DatPhong(MaDatPhong, MaPhong, maKhachHang, NgayDat, NgayTra, TongTIen);
         danhSacgDatPhong.add(datPhong);
         tableModel.addRow(new Object[]{MaDatPhong, MaPhong, maKhachHang, ngayDat, ngayTra, TongTIen});
@@ -498,7 +523,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
@@ -511,6 +535,5 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaPhong;
     private com.toedter.calendar.JDateChooser txtNgayDat;
     private com.toedter.calendar.JDateChooser txtNgayTra;
-    private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,7 +19,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private static final String separator = File.separator;
     private static final String PATH_FILE_CSV_Phong = curentDir + separator + "data" + separator + "Phong.csv";
     private static final String PATH_FILE_CSV_DATPHONG = curentDir + separator + "data" + separator + "DatPhong.csv";
-    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     DocGhiFile dc = new DocGhiFile();
     List<Phong> danhPhong = new ArrayList<>();
     File f = new File(PATH_FILE_CSV_Phong);
@@ -61,6 +61,10 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtNgayTra = new com.toedter.calendar.JDateChooser();
         HTNgayTra = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtLoaiPhong = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        HTloaiPhong = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -182,7 +186,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nhập ngày trả:");
+        jLabel5.setText("Loại Phòng:");
 
         txtNgayTra.setDateFormatString("dd-MM-yyyy HH:mm:ss");
 
@@ -201,31 +205,63 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Nhập ngày trả:");
+
+        txtLoaiPhong.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtLoaiPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Người");
+
+        HTloaiPhong.setBackground(new java.awt.Color(204, 204, 204));
+        HTloaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        HTloaiPhong.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
+        HTloaiPhong.setText("Hiển thị");
+        HTloaiPhong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HTloaiPhongMouseClicked(evt);
+            }
+        });
+        HTloaiPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HTloaiPhongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1044, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(timSoTang)
                     .addComponent(TimTrangThai, 0, 261, Short.MAX_VALUE)
                     .addComponent(txtTimMA)
-                    .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(txtLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)))
                 .addGap(91, 91, 91)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButunReset4)
                     .addComponent(HTSoTang)
                     .addComponent(HTtrangThai)
-                    .addComponent(HTNgayTra))
+                    .addComponent(HTNgayTra)
+                    .addComponent(HTloaiPhong))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1064, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,16 +281,21 @@ public class LocThongTinPhong extends javax.swing.JFrame {
                     .addComponent(TimTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(HTtrangThai))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(HTNgayTra)
+                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtLoaiPhong)
+                        .addComponent(jLabel7)
                         .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(HTNgayTra)
-                            .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(HTloaiPhong)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -419,6 +460,36 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
     }//GEN-LAST:event_HTNgayTraActionPerformed
 
+    private void HTloaiPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HTloaiPhongMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HTloaiPhongMouseClicked
+
+    private void HTloaiPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HTloaiPhongActionPerformed
+         try {
+
+            List<Phong> list = dc.docFilePhong();
+            boolean flag = false;
+            tableModel.setRowCount(0);
+            for (Phong item : list) {
+                if (item.getTrangThai().equals(txtLoaiPhong.getSelectedItem())) {
+                    flag = true;
+                    String maPhong = item.getMaPhong();
+                    int soTang = item.getSoTang();
+                    int loai = item.getLoaiPhong();
+                    String trangThai = item.getTrangThai();
+                    double gia = item.getGiaPhong();
+                    tableModel.addRow(new Object[]{maPhong, soTang, loai, trangThai, gia});
+                }
+            }
+
+            if (flag == false) {
+                JOptionPane.showMessageDialog(rootPane, "Không có loại phòng cần tìm");
+            }
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_HTloaiPhongActionPerformed
+
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -431,6 +502,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private javax.swing.JButton ButunReset4;
     private javax.swing.JButton HTNgayTra;
     private javax.swing.JButton HTSoTang;
+    private javax.swing.JButton HTloaiPhong;
     private javax.swing.JButton HTtrangThai;
     private javax.swing.JComboBox<String> TimTrangThai;
     private javax.swing.JLabel jLabel1;
@@ -438,6 +510,8 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -445,6 +519,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField timSoTang;
+    private javax.swing.JComboBox<String> txtLoaiPhong;
     private com.toedter.calendar.JDateChooser txtNgayTra;
     private javax.swing.JTextField txtTimMA;
     // End of variables declaration//GEN-END:variables
