@@ -168,10 +168,20 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         txtSoTang.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtSoTang.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtSoTang.setToolTipText("");
+        txtSoTang.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSoTangFocusLost(evt);
+            }
+        });
 
         txtGiaPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtGiaPhong.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtGiaPhong.setToolTipText("");
+        txtGiaPhong.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtGiaPhongFocusLost(evt);
+            }
+        });
 
         tblPhong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblPhong.setModel(new javax.swing.table.DefaultTableModel(
@@ -440,6 +450,21 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
         Collections.sort(danhPhong, new TangComparator());
         hienTHi(danhPhong);
     }//GEN-LAST:event_SapXepActionPerformed
+
+    private void txtSoTangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoTangFocusLost
+       if (extractNumber(txtSoTang.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập số tầng đúng định dạng");
+            txtSoTang.requestFocus();
+            
+        }
+    }//GEN-LAST:event_txtSoTangFocusLost
+
+    private void txtGiaPhongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaPhongFocusLost
+     if (extractNumber(txtGiaPhong.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập giá phòng đúng định dạng");
+            txtGiaPhong.requestFocus();
+        }
+    }//GEN-LAST:event_txtGiaPhongFocusLost
 
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {

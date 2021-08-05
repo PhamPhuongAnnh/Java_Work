@@ -37,7 +37,24 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
             }
         }
     }
-
+      public int extractNumber(String str) {
+        if (str == null) {
+            return -1;
+        }
+        boolean found = false;
+        for (int i = 0; i < str.length(); i++) {
+            char dt = str.charAt(i);
+            if (dt == '0' || dt == '1' || dt == '2' || dt == '3' || dt == '4' || dt == '5' || dt == '6' || dt == '7' || dt == '8' || dt == '9') {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -95,6 +112,12 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nhập mã Phòng cần sửa ");
 
+        txtSua.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSuaFocusLost(evt);
+            }
+        });
+
         btnHienThi.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnHienThi.setText("Hiển thị");
         btnHienThi.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +151,12 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
         txtLoai.setEditable(false);
 
         txtTang.setEditable(false);
+
+        txtGia.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtGiaFocusLost(evt);
+            }
+        });
 
         btnChinhSua.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnChinhSua.setText("Chỉnh sửa");
@@ -338,6 +367,18 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void txtSuaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSuaFocusLost
+      
+    }//GEN-LAST:event_txtSuaFocusLost
+
+    private void txtGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaFocusLost
+         if (extractNumber(txtGia.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập  đúng định dạng");
+            txtGia.requestFocus();
+            
+        }
+    }//GEN-LAST:event_txtGiaFocusLost
 
     /**
      * @param args the command line arguments

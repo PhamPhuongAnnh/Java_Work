@@ -2,11 +2,14 @@ package de_tai__so_5;
 
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.geometry.Side;
 
 public class ThuNhapForm extends javax.swing.JFrame {
 
@@ -15,6 +18,8 @@ public class ThuNhapForm extends javax.swing.JFrame {
     private static final String PATH_FILE_CSV_DATPHONG = curentDir + separator + "data" + separator + "DatPhong.csv";
     private static final String PATH_FILE_CSV_khachHang = curentDir + separator + "data" + separator + "KhachHang.csv";
     private static final String PATH_FILE_CSV_Phong = curentDir + separator + "data" + separator + "Phong.csv";
+
+    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
     File fKH = new File(PATH_FILE_CSV_khachHang);
     File fDP = new File(PATH_FILE_CSV_DATPHONG);
@@ -63,9 +68,12 @@ public class ThuNhapForm extends javax.swing.JFrame {
         txtNgay2 = new com.toedter.calendar.JDateChooser();
         HienThi = new javax.swing.JButton();
         txtTongTienNgay = new javax.swing.JTextField();
-        txtNgay1 = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        HienThi1 = new javax.swing.JButton();
+        txtTongTienThang = new javax.swing.JTextField();
+        txtNgay4 = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 148, 6));
 
@@ -106,30 +114,60 @@ public class ThuNhapForm extends javax.swing.JFrame {
             }
         });
 
+        txtTongTienNgay.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtTongTienNgay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTongTienNgayActionPerformed(evt);
             }
         });
 
-        txtNgay1.setDateFormatString("dd:MM:yyyy HH:mm:ss");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Nhập tháng:");
+
+        HienThi1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        HienThi1.setText("Hiển thị ");
+        HienThi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HienThi1ActionPerformed(evt);
+            }
+        });
+
+        txtTongTienThang.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtTongTienThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongTienThangActionPerformed(evt);
+            }
+        });
+
+        txtNgay4.setDateFormatString("MM:yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
+                .addGap(78, 78, 78)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNgay1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTongTienNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(26, 26, 26)
-                        .addComponent(txtNgay2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
-                .addComponent(HienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(348, 348, 348)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(HienThi, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(HienThi1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTongTienThang)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtNgay4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtTongTienNgay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                    .addComponent(txtNgay2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(8, 8, 8)))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,11 +181,16 @@ public class ThuNhapForm extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(txtNgay2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNgay1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtTongTienNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addComponent(txtTongTienNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(HienThi1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNgay4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88)
+                .addComponent(txtTongTienThang, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,17 +213,21 @@ public class ThuNhapForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public void TongTienNgay() {
         for (DatPhong item : danhSacgDatPhong) {
-  
-            if (txtNgay1.getDate().compareTo(item.getNgayTra()) < 0 ) {
-             if(txtNgay2.getDate().compareTo(item.getNgayTra() )> 0){
-                 System.out.println("PA");
-                 System.out.println(item.getMaDatPhong());
-                 tongTien += item.getTongTien();
+            if(df.format(item.getNgayTra()).equals(df.format(txtNgay2.getDate()))){
+                tongTien += item.getTongTien();
             }
-            }
-           
         }
-     
+
+    }
+
+    public void TongTienThang() {
+        DateFormat format = new SimpleDateFormat("MM-yyyy");
+        for (DatPhong item : danhSacgDatPhong) {
+             if(format.format(item.getNgayTra()).equals(format.format(txtNgay4.getDate()))){
+                tongTien += item.getTongTien();
+            }
+            
+        }
     }
     private void txtTongTienNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienNgayActionPerformed
         // TODO add your handling code here:
@@ -189,7 +236,19 @@ public class ThuNhapForm extends javax.swing.JFrame {
     private void HienThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HienThiActionPerformed
         TongTienNgay();
         txtTongTienNgay.setText(Double.toString(tongTien));
+      
+        
     }//GEN-LAST:event_HienThiActionPerformed
+
+    private void HienThi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HienThi1ActionPerformed
+        TongTienThang();
+//        System.out.println(txtNgay4.getDate());
+        txtTongTienThang.setText(Double.toString(tongTien));
+    }//GEN-LAST:event_HienThi1ActionPerformed
+
+    private void txtTongTienThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienThangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongTienThangActionPerformed
 
     public static void main(String args[]) {
 
@@ -202,14 +261,17 @@ public class ThuNhapForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton HienThi;
+    private javax.swing.JButton HienThi1;
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private com.toedter.calendar.JDateChooser txtNgay1;
     private com.toedter.calendar.JDateChooser txtNgay2;
+    private com.toedter.calendar.JDateChooser txtNgay4;
     private javax.swing.JTextField txtTongTienNgay;
+    private javax.swing.JTextField txtTongTienThang;
     // End of variables declaration//GEN-END:variables
 }

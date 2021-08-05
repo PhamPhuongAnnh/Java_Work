@@ -32,7 +32,24 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         }
         
     }
-    
+     public int extractNumber(String str) {
+        if (str == null) {
+            return -1;
+        }
+        boolean found = false;
+        for (int i = 0; i < str.length(); i++) {
+            char dt = str.charAt(i);
+            if (dt == '0' || dt == '1' || dt == '2' || dt == '3' || dt == '4' || dt == '5' || dt == '6' || dt == '7' || dt == '8' || dt == '9') {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,7 +127,31 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("PTTT:");
 
+        txtHoTen.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtHoTenFocusLost(evt);
+            }
+        });
+
+        txtSoCMND.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSoCMNDFocusLost(evt);
+            }
+        });
+
+        txtSoDT.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSoDTFocusLost(evt);
+            }
+        });
+
         txtPTTT.setEditable(false);
+
+        txtTuoi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTuoiFocusLost(evt);
+            }
+        });
 
         btnChinhSua.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnChinhSua.setText("Chỉnh sửa");
@@ -342,6 +383,35 @@ public class ChinhSuaForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Không tìm thấy khách hàng cần xóa");
         }
     }//GEN-LAST:event_btnXoaMouseClicked
+
+    private void txtHoTenFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtHoTenFocusLost
+          if (extractNumber(txtHoTen.getText()) == 0) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng tên không chứa số; Ví du: Nguyễn Văn A");
+            txtHoTen.requestFocus();
+        }
+    }//GEN-LAST:event_txtHoTenFocusLost
+
+    private void txtSoCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoCMNDFocusLost
+          if (extractNumber(txtSoCMND.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập số chứng minh nhân dân  đúng định dạng");
+            txtSoCMND.requestFocus();
+        }
+    }//GEN-LAST:event_txtSoCMNDFocusLost
+
+    private void txtSoDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoDTFocusLost
+         if (extractNumber(txtSoDT.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng số điện thoại");
+            txtSoDT.requestFocus();
+        }
+
+    }//GEN-LAST:event_txtSoDTFocusLost
+
+    private void txtTuoiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuoiFocusLost
+         if (extractNumber(txtTuoi.getText()) == 1) {
+            JOptionPane.showMessageDialog(rootPane, "Hãy nhập Tuổi đúng định dạng");
+            txtTuoi.requestFocus();
+        }
+    }//GEN-LAST:event_txtTuoiFocusLost
     
     public static void main() {
         try {

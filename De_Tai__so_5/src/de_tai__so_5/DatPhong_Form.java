@@ -75,7 +75,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
             Date ngayTra = item.getNgayTra();
             String ngayTra1 = df.format(ngayTra);
 
-           double tongTien = item.getTongTien();
+            double tongTien = item.getTongTien();
             tableModel.addRow(new Object[]{maDatPhong, maphong, maKhachHang, ngayDat1, ngayTra1, tongTien});
         }
     }
@@ -206,6 +206,11 @@ public class DatPhong_Form extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mã Khách Hàng:");
 
+        txtMaKhachHang.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMaKhachHangFocusLost(evt);
+            }
+        });
         txtMaKhachHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaKhachHangActionPerformed(evt);
@@ -307,12 +312,11 @@ public class DatPhong_Form extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel3))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(txtNgayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)))
+                                .addComponent(txtNgayDat, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel15)
                             .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
@@ -395,32 +399,32 @@ public class DatPhong_Form extends javax.swing.JFrame {
         //xử lý ngoại lệ 
     }//GEN-LAST:event_txtMaPhongActionPerformed
 
-    public double tongTien(double thoiGian,double giaPhong) {
+    public double tongTien(double thoiGian, double giaPhong) {
         double tongTien = 0;
         if (thoiGian < 24) {
             if (thoiGian > 0 && thoiGian <= 2) {
-                tongTien = giaPhong*15/100;
+                tongTien = giaPhong * 15 / 100;
             } else if (thoiGian > 2 && thoiGian <= 5) {
-                tongTien = giaPhong*25/100;
-            }else if(thoiGian>5){
-                tongTien=giaPhong*thoiGian*10/100;
+                tongTien = giaPhong * 25 / 100;
+            } else if (thoiGian > 5) {
+                tongTien = giaPhong * thoiGian * 10 / 100;
             }
-        }else if(thoiGian>=24){
-            int a= (int)(thoiGian/24);
-            double b = thoiGian- (double)24*a;
+        } else if (thoiGian >= 24) {
+            int a = (int) (thoiGian / 24);
+            double b = thoiGian - (double) 24 * a;
             System.out.println(a);
-             if (b > 0 && b<= 2) {
-                tongTien = giaPhong*15/100+giaPhong*a;
-            } else if (b> 2 && b <= 5) {
-                tongTien = giaPhong*25/100+giaPhong*a;
-            }else if(b>5){
-                tongTien=giaPhong*10/100*b+giaPhong*a;
-            }else if(b==0){
-                tongTien=giaPhong*a;
+            if (b > 0 && b <= 2) {
+                tongTien = giaPhong * 15 / 100 + giaPhong * a;
+            } else if (b > 2 && b <= 5) {
+                tongTien = giaPhong * 25 / 100 + giaPhong * a;
+            } else if (b > 5) {
+                tongTien = giaPhong * 10 / 100 * b + giaPhong * a;
+            } else if (b == 0) {
+                tongTien = giaPhong * a;
             }
         }
-            
-       return tongTien;
+
+        return tongTien;
     }
     private void buttunLuu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuu1ActionPerformed
 
@@ -435,18 +439,18 @@ public class DatPhong_Form extends javax.swing.JFrame {
         String ngayTra = df.format(NgayTra);
         //////////lam tien
         long a = NgayTra.getTime() - NgayDat.getTime();
-        double phut =  a / (60 * 1000) %60;
-        double gio = a /(60*60*1000);
-        double thoiGian = phut /60 +gio;
+        double phut = a / (60 * 1000) % 60;
+        double gio = a / (60 * 60 * 1000);
+        double thoiGian = phut / 60 + gio;
         System.out.println(thoiGian);
-        double giaPhong=0;
+        double giaPhong = 0;
         for (Phong item : danhSacgPhong) {
             if (item.getMaPhong().equals(txtMaPhong.getText())) {
-                 giaPhong= item.getGiaPhong();
+                giaPhong = item.getGiaPhong();
             }
         }
         System.out.println(giaPhong);
-        double TongTIen= tongTien(thoiGian, giaPhong);
+        double TongTIen = tongTien(thoiGian, giaPhong);
         ////////////////////////
         System.out.println(TongTIen);
 
@@ -500,13 +504,30 @@ public class DatPhong_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_ButunResetMouseClicked
 
     private void txtMaPhongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaPhongFocusLost
-//        for (Phong item : danhSacgPhong) {
-//            if (txtMaPhong.getText() != item.getMaPhong()) {
-//                JOptionPane.showMessageDialog(rootPane, "Hay nhập đúng định dạng mã phòng ví dụ: MP10");
-//            }
-//        }
+        boolean flag = false;
+        for (Phong item : danhSacgPhong) {
+            if (item.getMaPhong().equals(txtMaPhong)) {
+                flag = true;
+            }
+        }
+        if (flag = false) {
+            JOptionPane.showMessageDialog(rootPane, "Phòng không tồn tại. Mời nhập lại vd: MP1");
 
+        }
     }//GEN-LAST:event_txtMaPhongFocusLost
+
+    private void txtMaKhachHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaKhachHangFocusLost
+       boolean flag = false;
+        for (khachHang item : danhSachKhaHang) {
+            if (item.getMaKhachHang().equals(txtMaKhachHang)) {
+                flag = true;
+            }
+        }
+        if (flag = false) {
+            JOptionPane.showMessageDialog(rootPane, "Khách hàng không tồn tại. Mời nhập lại vd: KH1");
+
+        }
+    }//GEN-LAST:event_txtMaKhachHangFocusLost
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {

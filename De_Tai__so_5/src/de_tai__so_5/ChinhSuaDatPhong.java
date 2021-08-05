@@ -120,6 +120,8 @@ public class ChinhSuaDatPhong extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Ngày trả:");
 
+        txtMaPhong.setEditable(false);
+
         btnChinhSua.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnChinhSua.setText("Chỉnh sửa");
         btnChinhSua.addActionListener(new java.awt.event.ActionListener() {

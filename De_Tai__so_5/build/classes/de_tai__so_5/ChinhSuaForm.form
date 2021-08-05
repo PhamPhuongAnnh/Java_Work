@@ -252,10 +252,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtHoTen">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtHoTenFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSoCMND">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSoCMNDFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSoDT">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSoDTFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPTTT">
           <Properties>
@@ -263,6 +272,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTuoi">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTuoiFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnChinhSua">
           <Properties>
