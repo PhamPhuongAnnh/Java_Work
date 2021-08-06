@@ -34,7 +34,7 @@ public class ThuNhapForm extends javax.swing.JFrame {
 
     public ThuNhapForm() {
         initComponents();
-        if (fKH.exists() && fDP.exists()) {
+        if (fKH.exists() && fDP.exists()&&  fP.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
             } catch (CsvValidationException ex) {
