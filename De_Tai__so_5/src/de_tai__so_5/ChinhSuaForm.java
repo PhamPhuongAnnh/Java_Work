@@ -32,7 +32,7 @@ public class ChinhSuaForm extends javax.swing.JFrame {
         }
         
     }
-     public int extractNumber(String str) {
+       public int extractNumber(String str) {
         if (str == null) {
             return -1;
         }
@@ -48,6 +48,15 @@ public class ChinhSuaForm extends javax.swing.JFrame {
             return 1;
         } else {
             return 0;
+        }
+    }
+    
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
     @SuppressWarnings("unchecked")
@@ -392,14 +401,14 @@ public class ChinhSuaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtHoTenFocusLost
 
     private void txtSoCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoCMNDFocusLost
-          if (extractNumber(txtSoCMND.getText()) == 1) {
+          if (isNumeric(txtSoCMND.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập số chứng minh nhân dân  đúng định dạng");
             txtSoCMND.requestFocus();
         }
     }//GEN-LAST:event_txtSoCMNDFocusLost
 
     private void txtSoDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoDTFocusLost
-         if (extractNumber(txtSoDT.getText()) == 1) {
+         if (isNumeric(txtSoDT.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng số điện thoại");
             txtSoDT.requestFocus();
         }
@@ -407,7 +416,7 @@ public class ChinhSuaForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSoDTFocusLost
 
     private void txtTuoiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuoiFocusLost
-         if (extractNumber(txtTuoi.getText()) == 1) {
+         if (isNumeric(txtTuoi.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập Tuổi đúng định dạng");
             txtTuoi.requestFocus();
         }

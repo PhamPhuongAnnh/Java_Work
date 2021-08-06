@@ -87,7 +87,15 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
             return 0;
         }
     }
-
+    
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -460,7 +468,7 @@ public class NhapThongTinPhong_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSoTangFocusLost
 
     private void txtGiaPhongFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaPhongFocusLost
-     if (extractNumber(txtGiaPhong.getText()) == 1) {
+     if (isNumeric(txtGiaPhong.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập giá phòng đúng định dạng");
             txtGiaPhong.requestFocus();
         }

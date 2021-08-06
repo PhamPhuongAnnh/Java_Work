@@ -91,22 +91,14 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             return 0;
         }
     }
-    public int extractString(String str) {
-        if (str == null) {
-            return -1;
-        }
-        boolean found = false;
-        for (int i = 0; i < str.length(); i++) {
-            char dt = str.charAt(i);
-            if (dt != '0' || dt != '1' || dt != '2' || dt != '3' || dt != '4' || dt != '5' || dt != '6' || dt != '7' || dt != '8' || dt != '9') {
-                found = true;
-                break;
-            }
-        }
-        if (found == false) {
-            return 1;
-        } else {
-            return 0;
+
+
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -507,7 +499,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         String phuongTTT = boxPhuongThuThanhToan.getSelectedItem().toString();
         khachHang kh = new khachHang(maKhachHang, HotenKhachHang, scmnd, sdt, tuoi, phuongTTT);
         danhSachKhachHang.add(kh);
-        tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT});
+        tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, scmnd,sdt, tuoi,  phuongTTT});
 
 
     }//GEN-LAST:event_btnthemKhachHangActionPerformed
@@ -568,7 +560,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     private void txtCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCMNDFocusLost
         //Xử lý số chướng minh nhân dân 
-        if (extractString(txtCMND.getText()) == 0) {
+        if (isNumeric(txtCMND.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập số chứng minh nhân dân  đúng định dạng");
             txtCMND.requestFocus();
         }
@@ -576,7 +568,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCMNDFocusLost
 
     private void txtSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTFocusLost
-        if (extractString(txtSDT.getText()) == 1) {
+        if (isNumeric(txtSDT.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng số điện thoại");
             txtSDT.requestFocus();
         }
@@ -584,7 +576,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     private void txtTuoiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuoiFocusLost
 
-        if (extractString(txtTuoi.getText()) == 1) {
+        if (isNumeric(txtTuoi.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập Tuổi đúng định dạng");
             txtTuoi.requestFocus();
         }
@@ -595,11 +587,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnLuuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuMouseClicked
-
+        JOptionPane.showMessageDialog(rootPane, "Lưu thành công");
         f.delete();
         Collections.sort(danhSachKhachHang, new HoTenKhachHangComparator());
         dc.ghiFile(danhSachKhachHang);
-        JOptionPane.showMessageDialog(rootPane, "Lưu thành công");
+       
         resetForm();
     }//GEN-LAST:event_btnLuuMouseClicked
 

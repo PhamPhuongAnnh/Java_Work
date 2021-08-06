@@ -37,22 +37,12 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
             }
         }
     }
-      public int extractNumber(String str) {
-        if (str == null) {
-            return -1;
-        }
-        boolean found = false;
-        for (int i = 0; i < str.length(); i++) {
-            char dt = str.charAt(i);
-            if (dt == '0' || dt == '1' || dt == '2' || dt == '3' || dt == '4' || dt == '5' || dt == '6' || dt == '7' || dt == '8' || dt == '9') {
-                found = true;
-                break;
-            }
-        }
-        if (found == false) {
-            return 1;
-        } else {
-            return 0;
+     public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
     @SuppressWarnings("unchecked")
@@ -373,7 +363,7 @@ public class ChinhSuaPhongForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSuaFocusLost
 
     private void txtGiaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGiaFocusLost
-         if (extractNumber(txtGia.getText()) == 1) {
+         if (isNumeric(txtGia.getText()) == false) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập  đúng định dạng");
             txtGia.requestFocus();
             

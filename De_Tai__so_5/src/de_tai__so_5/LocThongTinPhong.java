@@ -37,7 +37,14 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             Logger.getLogger(LocThongTinPhong.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+     public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,6 +149,11 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         jLabel3.setText("Nhập số tâng:");
 
         timSoTang.setToolTipText("");
+        timSoTang.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                timSoTangFocusLost(evt);
+            }
+        });
         timSoTang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timSoTangActionPerformed(evt);
@@ -490,6 +502,13 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_HTloaiPhongActionPerformed
+
+    private void timSoTangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timSoTangFocusLost
+         if (isNumeric(timSoTang.getText()) == false) {
+            JOptionPane.showMessageDialog(rootPane, "Nhập số tâng đúng định dạng");
+            timSoTang.requestFocus();
+        }
+    }//GEN-LAST:event_timSoTangFocusLost
 
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {
