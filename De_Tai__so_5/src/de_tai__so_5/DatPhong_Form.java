@@ -51,6 +51,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
                 danhSachDatPhong = dc.docFileDatPhong();
                 String ma = danhSachDatPhong.get(danhSachDatPhong.size() - 1).getMaDatPhong();
                 id = Integer.parseInt(ma.substring(3)) + 1;
+                hienThi(danhSachDatPhong);
             } catch (CsvValidationException ex) {
                 Logger.getLogger(HoaDon_form.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
@@ -319,6 +320,11 @@ public class DatPhong_Form extends javax.swing.JFrame {
 
         btnThanhToan.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnThanhToan.setText("Thanh Toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -563,6 +569,10 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private void txtMaKhachHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMaKhachHangFocusLost
         kiemTraMaKhachHang();
     }//GEN-LAST:event_txtMaKhachHangFocusLost
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        HoaDon_form.main();
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {

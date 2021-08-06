@@ -91,6 +91,24 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             return 0;
         }
     }
+    public int extractString(String str) {
+        if (str == null) {
+            return -1;
+        }
+        boolean found = false;
+        for (int i = 0; i < str.length(); i++) {
+            char dt = str.charAt(i);
+            if (dt != '0' || dt != '1' || dt != '2' || dt != '3' || dt != '4' || dt != '5' || dt != '6' || dt != '7' || dt != '8' || dt != '9') {
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -550,7 +568,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     private void txtCMNDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCMNDFocusLost
         //Xử lý số chướng minh nhân dân 
-        if (extractNumber(txtCMND.getText()) == 1) {
+        if (extractString(txtCMND.getText()) == 0) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập số chứng minh nhân dân  đúng định dạng");
             txtCMND.requestFocus();
         }
@@ -558,7 +576,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCMNDFocusLost
 
     private void txtSDTFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSDTFocusLost
-        if (extractNumber(txtSDT.getText()) == 1) {
+        if (extractString(txtSDT.getText()) == 1) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đúng định dạng số điện thoại");
             txtSDT.requestFocus();
         }
@@ -566,7 +584,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
     private void txtTuoiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTuoiFocusLost
 
-        if (extractNumber(txtTuoi.getText()) == 1) {
+        if (extractString(txtTuoi.getText()) == 1) {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập Tuổi đúng định dạng");
             txtTuoi.requestFocus();
         }
