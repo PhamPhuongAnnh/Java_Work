@@ -32,7 +32,7 @@ public class HoaDon_form extends javax.swing.JFrame {
 
     public HoaDon_form() {
         initComponents();
-        if (fKH.exists() && fDP.exists()) {
+        if (fDP.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
             } catch (CsvValidationException ex) {
@@ -40,11 +40,16 @@ public class HoaDon_form extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(HoaDon_form.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+        }
+        if (fKH.exists()) {
             try {
                 danhSachKhaHang = dc.docFile();
             } catch (CsvValidationException ex) {
                 Logger.getLogger(HoaDon_form.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if(fP.exists()){
             try {
                 danhSachPhong = dc.docFilePhong();
             } catch (CsvValidationException ex) {
@@ -52,11 +57,11 @@ public class HoaDon_form extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void chuyenTrangThai(List<Phong> DanhSacgPhong) {
         String maPhong = null;
-        for(DatPhong item: danhSacgDatPhong){
-            if(item.getMaDatPhong().equals(MADatPhong.getText())){
+        for (DatPhong item : danhSacgDatPhong) {
+            if (item.getMaDatPhong().equals(MADatPhong.getText())) {
                 maPhong = item.getMaPhong();
             }
         }
@@ -615,7 +620,7 @@ public class HoaDon_form extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main() {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new HoaDon_form().setVisible(true);

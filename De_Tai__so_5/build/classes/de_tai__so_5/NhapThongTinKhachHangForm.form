@@ -95,9 +95,9 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="309" max="-2" attributes="0"/>
-                  <Component id="buttunLuu" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnthemKhachHang" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                  <Component id="ButunReset6" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLuu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                   <Component id="ButunReset" min="-2" pref="108" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
@@ -152,8 +152,8 @@
                       <Component id="ButunReset2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButunReset" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttunLuu" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ButunReset6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnthemKhachHang" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLuu" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
@@ -282,7 +282,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButunResetActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttunLuu">
+        <Component class="javax.swing.JButton" name="btnthemKhachHang">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -296,7 +296,7 @@
             <Property name="text" type="java.lang.String" value="Th&#xea;m Kh&#xe1;ch H&#xe0;ng"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttunLuuActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnthemKhachHangActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -315,9 +315,9 @@
                   <Table columnCount="6" rowCount="0">
                     <Column editable="true" title="M&#xe3; KH" type="java.lang.String"/>
                     <Column editable="true" title="H&#x1ecd; t&#xea;n" type="java.lang.String"/>
-                    <Column editable="true" title="Tu&#x1ed5;i" type="java.lang.Integer"/>
                     <Column editable="true" title="S&#x1ed1; CMND" type="java.lang.Integer"/>
                     <Column editable="true" title="S&#x110;T" type="java.lang.Integer"/>
+                    <Column editable="true" title="Tu&#x1ed5;i" type="java.lang.Integer"/>
                     <Column editable="true" title="PTTT" type="java.lang.String"/>
                   </Table>
                 </Property>
@@ -333,17 +333,17 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
                     <Column maxWidth="-1" minWidth="20" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="80" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -400,7 +400,7 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
-        <Component class="javax.swing.JButton" name="ButunReset6">
+        <Component class="javax.swing.JButton" name="btnLuu">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -414,8 +414,8 @@
             <Property name="text" type="java.lang.String" value="L&#x1b0;u "/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButunReset6MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButunReset6ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLuuMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

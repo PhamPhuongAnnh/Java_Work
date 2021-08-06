@@ -45,15 +45,10 @@ public class DatPhong_Form extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         tableModel = (DefaultTableModel) tblDatPhong.getModel();
-        try {
-            danhSachPhong = dc.docFilePhong();
-        } catch (CsvValidationException ex) {
-            Logger.getLogger(DatPhong_Form.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (fKH.exists() && fDP.exists() && fP.exists()) {
+
+        if (fDP.exists()) {
             try {
                 danhSachDatPhong = dc.docFileDatPhong();
-                hienThi(danhSachDatPhong);
                 String ma = danhSachDatPhong.get(danhSachDatPhong.size() - 1).getMaDatPhong();
                 id = Integer.parseInt(ma.substring(3)) + 1;
             } catch (CsvValidationException ex) {
@@ -61,11 +56,16 @@ public class DatPhong_Form extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(HoaDon_form.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if (fKH.exists()) {
             try {
                 danhSachKhaHang = dc.docFile();
+
             } catch (CsvValidationException ex) {
                 Logger.getLogger(HoaDon_form.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if (fP.exists()) {
             try {
                 danhSachPhong = dc.docFilePhong();
             } catch (CsvValidationException ex) {
@@ -104,7 +104,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
             String ngayDat1 = df.format(ngayDat);
             Date ngayTra = item.getNgayTra();
             String ngayTra1 = df.format(ngayTra);
-
             double tongTien = item.getTongTien();
             tableModel.addRow(new Object[]{maDatPhong, maphong, maKhachHang, ngayDat1, ngayTra1, tongTien});
         }
@@ -136,15 +135,13 @@ public class DatPhong_Form extends javax.swing.JFrame {
     public void kiemTraMaKhachHang() {
         boolean flag = false;
         for (khachHang item : danhSachKhaHang) {
-            System.out.println(item.getMaKhachHang());
             if (item.getMaKhachHang().equals(txtMaKhachHang.getText())) {
                 flag = true;
             }
         }
         if (flag == false) {
-            JOptionPane.showMessageDialog(rootPane, "Khách hàng không tồn tại. Mời nhập lại vd: KH1");
-            txtMaKhachHang.requestFocus();
-
+            JOptionPane.showMessageDialog(rootPane, "Khách Hàng không tồn tại. Mời nhập lại vd: KH1");
+            txtMaPhong.requestFocus();
         }
     }
 
@@ -463,7 +460,6 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         txtMaPhong.setText("");
         txtMaKhachHang.setText("");
-
         Date date = java.util.Calendar.getInstance().getTime();
         txtNgayDat.setDate(date);
         txtNgayTra.setDate(date);
@@ -541,6 +537,7 @@ public class DatPhong_Form extends javax.swing.JFrame {
     private void btnLuuFileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLuuFileMouseClicked
         fDP.delete();
         dc.ghiFileDatPhong(danhSachDatPhong);
+        JOptionPane.showMessageDialog(rootPane, "Lưu thành công");
     }//GEN-LAST:event_btnLuuFileMouseClicked
 
     private void btnLuuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuFileActionPerformed

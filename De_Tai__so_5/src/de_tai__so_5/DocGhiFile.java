@@ -74,7 +74,7 @@ public class DocGhiFile {
             if (!f.exists()) {
                 fw = new FileWriter(PATH_FILE_CSV_Phong, true);
                 CSVWriter csvWrite = new CSVWriter(fw, CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-                String[] header = {"Ma Phong", "So Tang", "Loại Phòng", "Trang Thai", "Gia tien"};
+                String[] header = {"Ma Phong", "So Tang", "Loai Phong", "Trang Thai", "Gia tien"};
                 csvWrite.writeNext(header);
                 for (Phong item : list) {
                     csvWrite.writeNext(new String[]{String.valueOf(item.getMaPhong()), String.valueOf(item.getSoTang()), String.valueOf(item.getLoaiPhong()),String.valueOf(item.getTrangThai()), String.valueOf(item.getGiaPhong())});
