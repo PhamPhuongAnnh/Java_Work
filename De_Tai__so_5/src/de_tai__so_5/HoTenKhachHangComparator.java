@@ -11,11 +11,11 @@ import java.util.Comparator;
  *
  * @author ADMIN
  */
-public class MaKHComparator implements Comparator<DatPhong>{
+public class HoTenKhachHangComparator implements Comparator<khachHang> {
 
     @Override
-    public int compare(DatPhong o1, DatPhong o2) {
-        return  o1.getMaKhachHang().compareTo(o2.getMaKhachHang());
+    public int compare(khachHang o1, khachHang o2) {
+        return o1.getHoTen().compareTo(o2.getHoTen());
     }
-    
+
 }

@@ -37,6 +37,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
                 danhSachKhachHang = dc.docFile();
                 String ma = danhSachKhachHang.get(danhSachKhachHang.size() - 1).getMaKhachHang();
                 id = Integer.parseInt(ma.substring(2)) + 1;
+                Collections.sort(danhSachKhachHang, new HoTenKhachHangComparator());
                 hienThi(danhSachKhachHang);
             } catch (CsvValidationException ex) {
                 Logger.getLogger(NhapThongTinKhachHangForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,7 +45,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void resetForm() {
         if (f.exists()) {
             try {
@@ -58,7 +59,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
 
         }
     }
-    
+
     public void hienThi(List<khachHang> danhSachKhachHang) {
         tableModel.setRowCount(0);
         for (khachHang item : danhSachKhachHang) {
@@ -68,11 +69,11 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             int tuoi = item.getTuoi();
             String cmnd = item.getCMND();
             String pttt = item.getPhuongThucThanhToan();
-            tableModel.addRow(new Object[]{maKhachHang, hoTen, cmnd,soDt, tuoi , pttt});
+            tableModel.addRow(new Object[]{maKhachHang, hoTen, cmnd, soDt, tuoi, pttt});
         }
     }
 
-     public int extractNumber(String str) {
+    public int extractNumber(String str) {
         if (str == null) {
             return -1;
         }
@@ -90,7 +91,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
             return 0;
         }
     }
-     
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -475,7 +476,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         txtTuoi.setText("");
         boxPhuongThuThanhToan.setSelectedIndex(0);
         resetForm();
-        
+
     }//GEN-LAST:event_ButunResetActionPerformed
 
     private void buttunLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttunLuuActionPerformed
@@ -490,7 +491,7 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
         danhSachKhachHang.add(kh);
         tableModel.addRow(new Object[]{maKhachHang, HotenKhachHang, sdt, tuoi, scmnd, phuongTTT});
     }//GEN-LAST:event_buttunLuuActionPerformed
-   
+
 
     private void txtHoTenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHoTenMouseClicked
 
@@ -517,15 +518,15 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void ButunReset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset2ActionPerformed
- 
+
     }//GEN-LAST:event_ButunReset2ActionPerformed
 
     private void ButunReset3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset3ActionPerformed
-       
+
     }//GEN-LAST:event_ButunReset3ActionPerformed
 
     private void btnTimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTimKiemMouseClicked
-       //chỉnh sửa lại tìm kiếm form
+        //chỉnh sửa lại tìm kiếm form
         LocKhachHangForm.main();
     }//GEN-LAST:event_btnTimKiemMouseClicked
 
@@ -570,22 +571,25 @@ public class NhapThongTinKhachHangForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTuoiFocusLost
 
     private void ButunReset6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButunReset6ActionPerformed
-     
+
     }//GEN-LAST:event_ButunReset6ActionPerformed
 
     private void ButunReset6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset6MouseClicked
+
         f.delete();
+        Collections.sort(danhSachKhachHang, new HoTenKhachHangComparator());
         dc.ghiFile(danhSachKhachHang);
+        resetForm();
     }//GEN-LAST:event_ButunReset6MouseClicked
 
     private void ButunReset2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButunReset2MouseClicked
-   
+
         ChinhSuaForm.main();
         this.dispose();
     }//GEN-LAST:event_ButunReset2MouseClicked
-    
+
     public static void main() {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
