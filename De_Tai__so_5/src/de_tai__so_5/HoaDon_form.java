@@ -32,6 +32,7 @@ public class HoaDon_form extends javax.swing.JFrame {
 
     public HoaDon_form() {
         initComponents();
+        this.setLocationRelativeTo(null);
         if (fDP.exists()) {
             try {
                 danhSacgDatPhong = dc.docFileDatPhong();
@@ -564,6 +565,7 @@ public class HoaDon_form extends javax.swing.JFrame {
                     maPhong = item.getMaPhong();
                     maKH = item.getMaKhachHang();
                     txtTongTien.setText(Double.toString(item.getTongTien()));
+                    allTongTien.setText(Double.toString(item.getTongTien()));
                 }
 
             }
@@ -577,7 +579,6 @@ public class HoaDon_form extends javax.swing.JFrame {
                 if (item2.getMaKhachHang().equals(maKH)) {
                     txtSĐT.setText(item2.getSDT());
                     hoTenKH.setText(item2.getHoTen());
-
                 }
             }
             if (flag == false) {

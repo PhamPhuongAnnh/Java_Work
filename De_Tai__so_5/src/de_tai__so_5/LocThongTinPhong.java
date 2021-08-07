@@ -72,6 +72,9 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         txtLoaiPhong = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         HTloaiPhong = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        txtNgay = new com.toedter.calendar.JDateChooser();
+        HTNgayTra2 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,7 +124,6 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
         ButunReset4.setBackground(new java.awt.Color(204, 204, 204));
         ButunReset4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        ButunReset4.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
         ButunReset4.setText("Hiển thị");
         ButunReset4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -164,11 +166,10 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nhập trạng thái:");
 
-        TimTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Con Trong", "Da Dat", "Dat Truoc" }));
+        TimTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Con Trong", "Da Dat" }));
 
         HTSoTang.setBackground(new java.awt.Color(204, 204, 204));
         HTSoTang.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        HTSoTang.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
         HTSoTang.setText("Hiển thị");
         HTSoTang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -183,7 +184,6 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
         HTtrangThai.setBackground(new java.awt.Color(204, 204, 204));
         HTtrangThai.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        HTtrangThai.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
         HTtrangThai.setText("Hiển thị");
         HTtrangThai.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -204,7 +204,6 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
         HTNgayTra.setBackground(new java.awt.Color(204, 204, 204));
         HTNgayTra.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        HTNgayTra.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
         HTNgayTra.setText("Hiển thị");
         HTNgayTra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -230,7 +229,6 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
         HTloaiPhong.setBackground(new java.awt.Color(204, 204, 204));
         HTloaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        HTloaiPhong.setIcon(new javax.swing.ImageIcon("D:\\img\\hienthi.png")); // NOI18N
         HTloaiPhong.setText("Hiển thị");
         HTloaiPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -243,19 +241,44 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Nhập ngày");
+
+        HTNgayTra2.setBackground(new java.awt.Color(204, 204, 204));
+        HTNgayTra2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        HTNgayTra2.setText("Hiển thị");
+        HTNgayTra2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HTNgayTra2MouseClicked(evt);
+            }
+        });
+        HTNgayTra2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HTNgayTra2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel8)))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addGap(46, 46, 46)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(timSoTang)
                     .addComponent(TimTrangThai, 0, 261, Short.MAX_VALUE)
@@ -263,15 +286,17 @@ public class LocThongTinPhong extends javax.swing.JFrame {
                     .addComponent(txtNgayTra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtLoaiPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)))
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel7))
+                    .addComponent(txtNgay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(91, 91, 91)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButunReset4)
                     .addComponent(HTSoTang)
                     .addComponent(HTtrangThai)
                     .addComponent(HTNgayTra)
-                    .addComponent(HTloaiPhong))
+                    .addComponent(HTloaiPhong)
+                    .addComponent(HTNgayTra2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1064, Short.MAX_VALUE)
         );
@@ -294,21 +319,28 @@ public class LocThongTinPhong extends javax.swing.JFrame {
                     .addComponent(TimTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(HTtrangThai))
-                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(HTNgayTra)
-                    .addComponent(txtNgayTra, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtLoaiPhong)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(HTloaiPhong)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(43, 43, 43)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(txtNgay, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(HTNgayTra2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNgayTra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(HTNgayTra, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtLoaiPhong)
+                    .addComponent(jLabel7)
+                    .addComponent(HTloaiPhong))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -465,7 +497,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             }
 
             if (flag == false) {
-                JOptionPane.showMessageDialog(rootPane, "Không có phòng thuộc trạng thái trên");
+                JOptionPane.showMessageDialog(rootPane, "Không có ngày này");
             }
         } catch (CsvValidationException ex) {
             Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -510,6 +542,43 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_timSoTangFocusLost
 
+    private void HTNgayTra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HTNgayTra2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HTNgayTra2MouseClicked
+
+    private void HTNgayTra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HTNgayTra2ActionPerformed
+        try {
+
+            List<Phong> list = dc.docFilePhong();
+
+            boolean flag = false;
+            tableModel.setRowCount(0);
+            
+            for (DatPhong item : danhSachDatPhong){
+                if (item.getNgayTra().compareTo(txtNgay.getDate())>=0) {
+                    flag = true;
+                    for (Phong itemPhong : list) {
+                        if (item.getMaPhong().equals(itemPhong.getMaPhong())) {
+                            String maPhong = itemPhong.getMaPhong();
+                            int soTang = itemPhong.getSoTang();
+                            int loai = itemPhong.getLoaiPhong();
+                            String trangThai = itemPhong.getTrangThai();
+                            double gia = itemPhong.getGiaPhong();
+                            tableModel.addRow(new Object[]{maPhong, soTang, loai, trangThai, gia});
+                        }
+                    }
+
+                }
+            }
+
+            if (flag == false) {
+                JOptionPane.showMessageDialog(rootPane, "Không có ngày này");
+            }
+        } catch (CsvValidationException ex) {
+            Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_HTNgayTra2ActionPerformed
+
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -521,6 +590,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButunReset4;
     private javax.swing.JButton HTNgayTra;
+    private javax.swing.JButton HTNgayTra2;
     private javax.swing.JButton HTSoTang;
     private javax.swing.JButton HTloaiPhong;
     private javax.swing.JButton HTtrangThai;
@@ -532,6 +602,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -540,6 +611,7 @@ public class LocThongTinPhong extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField timSoTang;
     private javax.swing.JComboBox<String> txtLoaiPhong;
+    private com.toedter.calendar.JDateChooser txtNgay;
     private com.toedter.calendar.JDateChooser txtNgayTra;
     private javax.swing.JTextField txtTimMA;
     // End of variables declaration//GEN-END:variables
