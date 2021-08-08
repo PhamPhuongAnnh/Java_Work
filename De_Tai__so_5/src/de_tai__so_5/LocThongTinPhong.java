@@ -230,6 +230,11 @@ public class LocThongTinPhong extends javax.swing.JFrame {
         HTloaiPhong.setBackground(new java.awt.Color(204, 204, 204));
         HTloaiPhong.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         HTloaiPhong.setText("Hiển thị");
+        HTloaiPhong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                HTloaiPhongMouseDragged(evt);
+            }
+        });
         HTloaiPhong.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HTloaiPhongMouseClicked(evt);
@@ -478,7 +483,6 @@ public class LocThongTinPhong extends javax.swing.JFrame {
 
             boolean flag = false;
             tableModel.setRowCount(0);
-            
             for (DatPhong item : danhSachDatPhong){
                 if (df.format(item.getNgayTra()).equals(df.format(txtNgayTra.getDate()))) {
                     flag = true;
@@ -578,6 +582,10 @@ public class LocThongTinPhong extends javax.swing.JFrame {
             Logger.getLogger(ChinhSuaForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_HTNgayTra2ActionPerformed
+
+    private void HTloaiPhongMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HTloaiPhongMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HTloaiPhongMouseDragged
 
     public static void main() {
         java.awt.EventQueue.invokeLater(new Runnable() {

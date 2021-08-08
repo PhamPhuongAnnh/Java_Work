@@ -13,8 +13,6 @@ public class Phong {
     
     private String maPhong;
     private int soTang;
- 
-   
     private int loaiPhong;  
     public String trangThai;
     private double giaPhong;

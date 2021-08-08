@@ -27,8 +27,8 @@ public class khachHang {
     }
 
  
-   
-
+   //regex
+//sql
     public khachHang() {
     }
 
